@@ -13,7 +13,7 @@ const url = "https://translation.googleapis.com/language/translate/v2?key="+APIk
 let requestObject = 
     {
 	"source": "en",
-	"target": "ko",
+	"target": "hi",
 	"q": [
 	    "example phrase"
 	]
@@ -47,7 +47,7 @@ APIrequest(
 		// API worked but is not giving you data
 		console.log(APIresHead.error);
 	    } else {
-		console.log("In Korean: ", 
+		console.log("In Hindi: ", 
 		    APIresBody.data.translations[0].translatedText);
 		console.log("\n\nJSON was:");
 		console.log(JSON.stringify(APIresBody, undefined, 2));
