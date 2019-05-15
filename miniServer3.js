@@ -31,7 +31,7 @@ function translateHandler(req, res, next) {
         let requestObject = 
         {
             "source": "en",
-            "target": "hi",
+            "target": "es",
             "q": 
             [
                 mystring
@@ -64,12 +64,12 @@ function translateHandler(req, res, next) {
                     console.log(APIresHead.error);
                 } 
                 else {
-                    console.log("In Hindi: ", 
+                    console.log("In Spanish: ", 
                                 APIresBody.data.translations[0].translatedText);
                     let translatedString = APIresBody.data.translations[0].translatedText;
                     console.log("\n\nJSON was:");
                     console.log(JSON.stringify(APIresBody, undefined, 2));
-                    res.json({"English" : mystring,"Hindi" : translatedString});
+                    res.json({"English" : mystring,"Spanish" : translatedString});
                     // print it out as a string, nicely formatted
                 }
             }
