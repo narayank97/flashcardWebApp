@@ -69,7 +69,7 @@ function translateHandler(req, res, next) {
                     let translatedString = APIresBody.data.translations[0].translatedText;
                     console.log("\n\nJSON was:");
                     console.log(JSON.stringify(APIresBody, undefined, 2));
-                    res.json({"English" : mystring,"Spanish" : translatedString});
+                    res.json({"English" : mystring , "Spanish" : translatedString});
                     // print it out as a string, nicely formatted
                 }
             }
