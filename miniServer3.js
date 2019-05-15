@@ -23,10 +23,10 @@ function translateHandler(req, res, next) {
     const APIkey = "AIzaSyBaq2006_i0hQd_vbUfwq-cKMZ19QpZc7s";  // ADD API KEY HERE
     const url = "https://translation.googleapis.com/language/translate/v2?key="+APIkey
 
-    let url = req.url;
+    let secondurl = req.url;
     let wordObj = req.query;
     console.log(wordObj);
-    if (qObj.english != undefined) {
+    if (wordObj.english != undefined) {
         let mystring = wordObj.english;
         let requestObject = 
         {
