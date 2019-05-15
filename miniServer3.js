@@ -66,8 +66,10 @@ function translateHandler(req, res, next) {
                 else {
                     console.log("In Hindi: ", 
                                 APIresBody.data.translations[0].translatedText);
+                    let translatedString = APIresBody.data.translations[0].translatedText;
                     console.log("\n\nJSON was:");
                     console.log(JSON.stringify(APIresBody, undefined, 2));
+                    res.json({"English" : mystring,"Hindi" : translatedString});
                     // print it out as a string, nicely formatted
                 }
             }
