@@ -1,29 +1,44 @@
-<!doctype HTML>
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Spanish Translator</title>
+    <!-- translation -->
+    <link rel="stylesheet" type="text/css" href="reset.css" />
+  </head>
 
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<title>Spanish Translator</title>
-<link rel="stylesheet" type="text/css" href="reset.css">
-</head>
+  <body>
+    <header>
+      <h2>Spanish Translator</h2>
+    </header>
 
-<body>
+    <main>
+      <div id="inputDiv">
+        <input id="myWord" />
+        <button onclick="makeCorsRequest()" id="submit">
+          <p>submit</p>
+        </button>
+      </div>
+      <div id="outputDiv">
+        <p id="outputGoesHere"></p>
+      </div>
+    </main>
 
-<header>
-<h2>Spanish Translator</h2>
-</header>
+    <script src="makeRequest.js"></script>
 
-<main>
-<div id="inputDiv">
-  <input id="myWord">
-  <button onclick="makeCorsRequest()" id="submit" > <p>submit</p></button>
-</div>
-<div id="outputDiv">
-  <p id="outputGoesHere"></p>
-</div>
-</main>
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
 
-<script src="makeRequest.js"></script>
-</body>
+    <!-- Load our React component. -->
+    <script src="translation.js"></script>
+  </body>
 </html>
