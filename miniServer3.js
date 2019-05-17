@@ -1,5 +1,6 @@
 const express = require('express')
 const port = 55106 // you need to put your port number here
+let myFlashCardObj;
 
 function queryHandler(req, res, next) {
     let url = req.url;

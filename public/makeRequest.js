@@ -1,5 +1,7 @@
 "strict mode";
 
+let myTranslations;
+
 // Do a CORS request to get Davis weather hourly forecast
 
 // Create the XHR object.
@@ -27,6 +29,7 @@ function makeCorsRequest() {
       let object = JSON.parse(responseStr);  // turn it into an object
       console.log(JSON.stringify(object, undefined, 2));  // print it out as a string, nicely formatted
       let myWord = JSON.stringify(object.Spanish, undefined, 2);
+      myTranslations = myWord;
       console.log(myWord);
       document.getElementById("outputGoesHere").innerHTML = myWord;
     };
