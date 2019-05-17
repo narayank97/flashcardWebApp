@@ -113,6 +113,7 @@ function storeHandler(req, res, next) {
         db.run(cmdStr, eng, kor, insertCallback);
         console.log("We're in boyz");
         dumpDB(); 
+        res.json("We put it in the database ");
     }
     else {
         next();
