@@ -90,9 +90,9 @@ function storeHandler(req, res, next) {
     let url = req.url;
     let wordObj = req.query;
     console.log(wordObj);
-    if ((wordObj.english != undefined) && (wordObj.phrase != undefined)) {
+    if ((wordObj.english != undefined) && (wordObj.korean != undefined)) {
         let eng = wordObj.english;
-        let kor = wordObj.phrase;
+        let kor = wordObj.korean;
         const cmdStr = 'INSERT into Flashcards (user, english,korean, seen, correct) VALUES (1, @0, @1, 0, 0)';
         db.run(cmdStr, eng, kor, insertCallback);
         console.log("We're in boyz");
