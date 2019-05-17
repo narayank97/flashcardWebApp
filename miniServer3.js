@@ -112,6 +112,7 @@ function storeHandler(req, res, next) {
         const cmdStr = 'INSERT into Flashcards (user, english,korean, seen, correct) VALUES (1, @0, @1, 0, 0)';
         db.run(cmdStr, eng, kor, insertCallback);
         console.log("We're in boyz");
+        dumpDB(); 
     }
     else {
         next();
