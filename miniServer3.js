@@ -87,6 +87,8 @@ function insertCallback(err) {
 } 
 //http://server162.site:port/store?english=example phrase&korean=예시 문구
 function storeHandler(req, res, next) {
+    const sqlite3 = require("sqlite3").verbose();  // use sqlite
+    const fs = require("fs"); // file system
     const dbFileName = "Flashcards.db";
     // makes the object that represents the database in our code
     const db = new sqlite3.Database(dbFileName);  // object, not database.
