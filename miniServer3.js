@@ -73,11 +73,29 @@ function translateHandler(req, res, next) {
                 }
             }
         } // end callback function
-
-
-
-
         // this is what my palindrom becomes res.json( {"English" : newString} );
+    }
+    else {
+        next();
+    }
+}
+
+function insertCallback(err) {
+    if (err) { 
+        console.log(err); 
+    }
+} 
+//http://server162.site:port/store?english=example phrase&korean=예시 문구
+function storeHandler(req, res, next) {
+    let url = req.url;
+    let wordObj = req.query;
+    console.log(wordObj);
+    if ((wordObj.english != undefined) && (wordObj.phrase != undefined)) {
+        let eng = wordObj.english;
+        let kor = wordObj.phrase;
+        const cmdStr = 'INSERT into Flashcards (user, english,korean, seen, correct) VALUES (1, @0, @1, 0, 0)';
+        db.run(cmdStr, eng, kor, insertCallback);
+        console.log("We're in boyz");
     }
     else {
         next();
@@ -95,7 +113,9 @@ function fileNotFound(req, res) {
 const app = express()
 app.use(express.static('public'));  // can I find a static file? 
 app.get('/query', queryHandler);   // if not, is it a valid query?
-app.get('/translate', translateHandler);   // if not, is it a valid query?
+app.get('/translate', translateHandler);   // if not, is it a valid translate query?
+app.get('/store', storeHandler);   // if not, is it a valid store query?
+
 app.use(fileNotFound);            // otherwise not found
 
 app.listen(port, function () { console.log('Listening...'); })
