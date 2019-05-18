@@ -1,8 +1,4 @@
 "strict mode";
-
-let myEnglish;
-let myTranslation;
-
 // Do a CORS request to get Davis weather hourly forecast
 
 // Create the XHR object.
@@ -29,10 +25,10 @@ function makeCorsRequest() {
   xhr.onload = function() {
       let responseStr = xhr.responseText;  // get the JSON string 
       let object = JSON.parse(responseStr);  // turn it into an object
-      console.log(JSON.stringify(object, undefined, 2));  // print it out as a string, nicely formatted
+      // console.log(JSON.stringify(object, undefined, 2));  // print it out as a string, nicely formatted
       let myWord = JSON.stringify(object.Spanish, undefined, 2);
       myTranslation = myWord;
-      console.log(myWord);
+      // console.log(myWord);
       document.getElementById("outputGoesHere").innerHTML = myWord;
     };
 
@@ -57,6 +53,10 @@ function makeCorsRequestStore() {
     // makes the object that represents the database in our code
     const db = new sqlite3.Database(dbFileName);  // object, not database.
 
+    let eng = document.getElementById("myWord").innerHTML;
+    let kor = document.getElementById("outputGoesHere").innerHTML;
+    
+
     //let input = document.getElementById("myWord").value;
     let url = "store?english="+myEnglish+"&korean="+myTranslation;   
     let xhr = createCORSRequest('GET', url);
@@ -69,9 +69,8 @@ function makeCorsRequestStore() {
 
     // Load some functions into response handlers.
     xhr.onload = function() {
-      if ((myEnglish != undefined) && (myTranslation != undefined)) {
-        let eng = myEnglish;
-        let kor = myTranslation;
+      if ((eng != undefined) && (kor != undefined)) {
+        
         const cmdStr = 'INSERT into Flashcards (user, english,korean, seen, correct) VALUES (1, @0, @1, 0, 0)';
         db.run(cmdStr, eng, kor, insertCallback);
         console.log("We're in boyz");
