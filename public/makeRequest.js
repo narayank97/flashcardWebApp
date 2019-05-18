@@ -47,18 +47,12 @@ function insertCallback(err) {
 } 
 
 function makeCorsRequestStore() {
-    const sqlite3 = require("sqlite3").verbose();  // use sqlite
-    const fs = require("fs"); // file system
-    const dbFileName = "Flashcards.db";
-    // makes the object that represents the database in our code
-    const db = new sqlite3.Database(dbFileName);  // object, not database.
-
     let eng = document.getElementById("myWord").innerHTML;
     let kor = document.getElementById("outputGoesHere").innerHTML;
     
 
     //let input = document.getElementById("myWord").value;
-    let url = "store?english="+myEnglish+"&korean="+myTranslation;   
+    let url = "store?english="+eng+"&korean="+kor;   
     let xhr = createCORSRequest('GET', url);
 
     // checking if browser does CORS
@@ -69,15 +63,7 @@ function makeCorsRequestStore() {
 
     // Load some functions into response handlers.
     xhr.onload = function() {
-      if ((eng != undefined) && (kor != undefined)) {
-        
-        const cmdStr = 'INSERT into Flashcards (user, english,korean, seen, correct) VALUES (1, @0, @1, 0, 0)';
-        db.run(cmdStr, eng, kor, insertCallback);
-        console.log("We're in boyz");
-        dumpDB(); 
-        res.json("We put it in the database ");
-      }
-        
+        console.log("It got back poggers");
     };
 
     xhr.onerror = function() {
