@@ -47,7 +47,7 @@ function insertCallback(err) {
 
 function makeCorsRequestStore() {
     let eng = document.getElementById("myWord").value;
-    let span = document.getElementById("outputGoesHere").value;
+    let span = document.getElementById("outputGoesHere").innerHTML;
     
 
     //let input = document.getElementById("myWord").value;
