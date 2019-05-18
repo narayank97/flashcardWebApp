@@ -63,6 +63,7 @@ function makeCorsRequestStore() {
 
     // Load some functions into response handlers.
     xhr.onload = function() {
+        document.getElementById("storeoutputGoesHere").innerHTML = "I stored: "+kor;
         console.log("It got back poggers");
     };
 
