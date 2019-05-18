@@ -22,7 +22,7 @@ function translateHandler(req, res, next) {
     const APIrequest = require('request');
     const http = require('http');
     const APIkey = "AIzaSyBaq2006_i0hQd_vbUfwq-cKMZ19QpZc7s";  // ADD API KEY HERE
-    const url = "https://translation.googleapis.com/language/translate/v2?key=" + APIkey
+    const url = "https://translation.googleapis.com/language/translate/v2?key=" + APIkey;
 
     let secondurl = req.url;
     let wordObj = req.query;
@@ -64,11 +64,10 @@ function translateHandler(req, res, next) {
                     console.log(APIresHead.error);
                 }
                 else {
-                    console.log("In Spanish: ",
-                        APIresBody.data.translations[0].translatedText);
+                    //console.log("In Spanish: ",APIresBody.data.translations[0].translatedText);
                     let translatedString = APIresBody.data.translations[0].translatedText;
-                    console.log("\n\nJSON was:");
-                    console.log(JSON.stringify(APIresBody, undefined, 2));
+                    //console.log("\n\nJSON was:");
+                    //console.log(JSON.stringify(APIresBody, undefined, 2));
                     res.json({ "English": mystring, "Spanish": translatedString });
                     // print it out as a string, nicely formatted
                 }
@@ -97,7 +96,7 @@ function dumpDB() {
     function dataCallback( err, data ) {console.log(data)}
 }
 
-//http://server162.site:port/store?english=example phrase&korean=예시 문구
+//http://server162.site:port/store?english=example phrase&spanish=예시 문구
 function storeHandler(req, res, next) {
     const sqlite3 = require("sqlite3").verbose();  // use sqlite
     const fs = require("fs"); // file system
@@ -107,11 +106,11 @@ function storeHandler(req, res, next) {
     let url = req.url;
     let wordObj = req.query;
     console.log(wordObj);
-    if ((wordObj.english != undefined) && (wordObj.korean != undefined)) {
+    if ((wordObj.english != undefined) && (wordObj.spanish != undefined)) {
         let eng = wordObj.english;
-        let kor = wordObj.korean;
-        const cmdStr = 'INSERT into Flashcards (user, english,korean, seen, correct) VALUES (1, @0, @1, 0, 0)';
-        db.run(cmdStr, eng, kor, insertCallback);
+        let span = wordObj.spanish;
+        const cmdStr = 'INSERT into Flashcards (user, english,spanish, seen, correct) VALUES (1, @0, @1, 0, 0)';
+        db.run(cmdStr, eng, span, insertCallback);
         console.log("We're in boyz");
         dumpDB(); 
         res.json("We put it in the database ");

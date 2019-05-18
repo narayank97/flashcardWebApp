@@ -48,11 +48,11 @@ function insertCallback(err) {
 
 function makeCorsRequestStore() {
     let eng = document.getElementById("myWord").innerHTML;
-    let kor = document.getElementById("outputGoesHere").innerHTML;
+    let span = document.getElementById("outputGoesHere").innerHTML;
     
 
     //let input = document.getElementById("myWord").value;
-    let url = "store?english="+eng+"&korean="+kor;   
+    let url = "store?english="+eng+"&spanish="+span;   
     let xhr = createCORSRequest('GET', url);
 
     // checking if browser does CORS
@@ -63,7 +63,7 @@ function makeCorsRequestStore() {
 
     // Load some functions into response handlers.
     xhr.onload = function() {
-        document.getElementById("storeoutputGoesHere").innerHTML = "I stored: "+kor;
+        document.getElementById("storeoutputGoesHere").innerHTML = "I stored: "+span;
         console.log("It got back poggers");
     };
 
