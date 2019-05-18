@@ -11,8 +11,7 @@ function createCORSRequest(method, url) {
 // Make the actual CORS request.
 function makeCorsRequest() {
    let input = document.getElementById("myWord").value;
-   let url = "translate?english="+input;
-   myEnglish = input;   
+   let url = "translate?english="+input;  
    let xhr = createCORSRequest('GET', url);
 
   // checking if browser does CORS
@@ -47,8 +46,8 @@ function insertCallback(err) {
 } 
 
 function makeCorsRequestStore() {
-    let eng = document.getElementById("myWord").innerHTML;
-    let span = document.getElementById("outputGoesHere").innerHTML;
+    let eng = document.getElementById("myWord").value;
+    let span = document.getElementById("outputGoesHere").value;
     
 
     //let input = document.getElementById("myWord").value;
