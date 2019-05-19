@@ -39,6 +39,17 @@ class Footer extends React.Component {
   }
 }
 
+class Google extends React.Component {
+  render() {
+    return (
+      <div className="google">
+        <img src="./assets/google.jpg" />
+        <p>Log in with Google</p>
+      </div>
+    );
+  }
+}
+
 class Answer extends React.Component {
   render() {
     return (
@@ -61,12 +72,27 @@ class Answer extends React.Component {
     );
   }
 }
-class Google extends React.Component {
+
+class FirstTime extends React.Component {
   render() {
     return (
-      <div className="google">
-        <img src="./assets/google.jpg" />
-        <p>Log in with Google</p>
+      <div>
+        <Button class="button-blue" text="Add" />
+        <div className="column-container">
+          <Title />
+          <div className="row-container">
+            <div className="medium-card">
+              <p>{this.props.question}</p>
+            </div>
+            <div className="medium-card">
+              <p>{this.props.input}</p>
+            </div>
+          </div>
+          <div className="btn-container">
+            <Button class="button-green " text="Next" />
+          </div>
+          <Footer username="Daniel" />
+        </div>
       </div>
     );
   }
@@ -91,9 +117,12 @@ class LogIn extends React.Component {
     );
   }
 }
-
 // ReactDOM.render(
 //   <Answer question="Hola Como Esta?" input="Hello! How are you?" />,
 //   document.getElementById("root")
 // );
-ReactDOM.render(<LogIn />, document.getElementById("root"));
+ReactDOM.render(
+  <FirstTime question="Hola Como Esta?" input="Hello! How are you?" />,
+  document.getElementById("root")
+);
+// ReactDOM.render(<LogIn />, document.getElementById("root"));
