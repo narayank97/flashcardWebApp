@@ -2,7 +2,7 @@ class Title extends React.Component {
   render() {
     return (
       <div className="title">
-        {/* <Button class="button-blue" text="Add" /> */}
+        <Button class="button-blue" text="Add" />
         <h1>Lango!</h1>
       </div>
     );
@@ -53,10 +53,10 @@ class Google extends React.Component {
 class Answer extends React.Component {
   render() {
     return (
-      <div>
-        <Button class="button-blue" text="Add" />
+      <div className="col">
+        <Title />
+        {/* <Button class="button-blue" text="Add" /> */}
         <div className="column-container">
-          <Title />
           <div className="big-card">
             <p>{this.props.question}</p>
           </div>
@@ -66,8 +66,8 @@ class Answer extends React.Component {
           <div className="btn-container">
             <Button class="button-green " text="Next" />
           </div>
-          <Footer username="Daniel" />
         </div>
+        <Footer username="Daniel" />
       </div>
     );
   }
@@ -76,10 +76,10 @@ class Answer extends React.Component {
 class FirstTime extends React.Component {
   render() {
     return (
-      <div>
-        <Button class="button-blue" text="Add" />
+      <div className="col">
+        <Title />
+        {/* <Button class="button-blue" text="Add" /> */}
         <div className="column-container">
-          <Title />
           <div className="row-container">
             <div className="medium-card">
               <p>{this.props.question}</p>
@@ -91,8 +91,8 @@ class FirstTime extends React.Component {
           <div className="btn-container">
             <Button class="button-green " text="Next" />
           </div>
-          <Footer username="Daniel" />
         </div>
+        <Footer username="Daniel" />
       </div>
     );
   }
@@ -117,12 +117,12 @@ class LogIn extends React.Component {
     );
   }
 }
-// ReactDOM.render(
-//   <Answer question="Hola Como Esta?" input="Hello! How are you?" />,
-//   document.getElementById("root")
-// );
 ReactDOM.render(
-  <FirstTime question="Hola Como Esta?" input="Hello! How are you?" />,
+  <Answer question="Hola Como Esta?" input="Hello! How are you?" />,
   document.getElementById("root")
 );
+// ReactDOM.render(
+//   <FirstTime question="Hola Como Esta?" input="Hello! How are you?" />,
+//   document.getElementById("root")
+// );
 // ReactDOM.render(<LogIn />, document.getElementById("root"));
