@@ -61,32 +61,39 @@ class Answer extends React.Component {
     );
   }
 }
-
 class Google extends React.Component {
   render() {
-    return <div className="google" />;
+    return (
+      <div className="google">
+        <img src="./assets/google.jpg" />
+        <p>Log in with Google</p>
+      </div>
+    );
   }
 }
 
 class LogIn extends React.Component {
   render() {
     return (
-      <div className="row-container">
-        {/* <Correct />
-        <Correct /> */}
-        <div className=".row-col">
-          <Google />
-        </div>
-        <div className=".row-col">
-          <Correct />
+      <div className="full-height">
+        <div className="container">
+          <div className="left-half ">
+            <div className="text">
+              <h1>Welcome to Lango!</h1>
+              <p>Customize your vocabulary</p>
+            </div>
+          </div>
+          <div className="right-half ">
+            <Google />
+          </div>
         </div>
       </div>
     );
   }
 }
 
-ReactDOM.render(
-  <Answer question="Hola Como Esta?" input="Hello! How are you?" />,
-  document.getElementById("root")
-);
-// ReactDOM.render(<LogIn />, document.getElementById("root"));
+// ReactDOM.render(
+//   <Answer question="Hola Como Esta?" input="Hello! How are you?" />,
+//   document.getElementById("root")
+// );
+ReactDOM.render(<LogIn />, document.getElementById("root"));
