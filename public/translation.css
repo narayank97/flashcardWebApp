@@ -157,20 +157,23 @@ body {
 
 .title {
   display: block;
-  /* display: flex; */
+  display: flex;
   /* flex: 1 2; */
-  width: 100%;
+  width: 90%;
   /* text-align: center; */
   color: #4c6baf;
   margin-bottom: 3em;
 }
 
 .title h1 {
-  float: right;
+  /* float: right; */
+  flex: 1;
+  /* margin-left: 30%; */
   text-align: center;
   width: 100%;
   font-family: "Raleway", sans-serif;
   font-size: 5.5em;
+  font-weight: 800;
 }
 
 /* CARDS */
@@ -199,6 +202,19 @@ body {
 
 .big-card p {
   font-size: 2.5em;
+}
+
+.big-card .refresh {
+  position: relative;
+  /* border: 2px solid green; */
+  top: -45%;
+}
+
+.big-card .refresh img {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 3em;
 }
 
 /* CORRECT */
@@ -280,10 +296,12 @@ body {
 }
 
 .button-blue {
-  position: absolute;
+  /* position: absolute;
   top: 0.5em;
-  left: 2em;
+  left: 2em; */
 
+  margin: auto;
+  margin-left: 3%;
   background-color: #4c6baf;
   color: white;
   font-size: 2em;

@@ -58,6 +58,9 @@ class Answer extends React.Component {
         {/* <Button class="button-blue" text="Add" /> */}
         <div className="column-container">
           <div className="big-card">
+            <div className="refresh">
+              <img src="./assets/noun_Refresh_2310283.svg" />
+            </div>
             <p>{this.props.question}</p>
           </div>
           <div className="small-card">
