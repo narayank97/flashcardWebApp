@@ -2,7 +2,7 @@ class Title extends React.Component {
   render() {
     return (
       <div className="title">
-        {/* <Button class="button-blue" text="Add" /> */}
+        <Button class="button-blue" text="Add" />
         <h1>Lango!</h1>
       </div>
     );
@@ -39,13 +39,24 @@ class Footer extends React.Component {
   }
 }
 
+class Google extends React.Component {
+  render() {
+    return (
+      <div className="google">
+        <img src="./assets/google.jpg" />
+        <p>Log in with Google</p>
+      </div>
+    );
+  }
+}
+
 class Answer extends React.Component {
   render() {
     return (
-      <div>
-        <Button class="button-blue" text="Add" />
+      <div className="col">
+        <Title />
+        {/* <Button class="button-blue" text="Add" /> */}
         <div className="column-container">
-          <Title />
           <div className="big-card">
             <p>{this.props.question}</p>
           </div>
@@ -55,38 +66,63 @@ class Answer extends React.Component {
           <div className="btn-container">
             <Button class="button-green " text="Next" />
           </div>
-          <Footer username="Daniel" />
         </div>
+        <Footer username="Daniel" />
       </div>
     );
   }
 }
 
-class Google extends React.Component {
+class FirstTime extends React.Component {
   render() {
-    return <div className="google" />;
+    return (
+      <div className="col">
+        <Title />
+        {/* <Button class="button-blue" text="Add" /> */}
+        <div className="column-container">
+          <div className="row-container">
+            <div className="medium-card">
+              <p>{this.props.question}</p>
+            </div>
+            <div className="medium-card">
+              <p>{this.props.input}</p>
+            </div>
+          </div>
+          <div className="btn-container">
+            <Button class="button-green " text="Next" />
+          </div>
+        </div>
+        <Footer username="Daniel" />
+      </div>
+    );
   }
 }
 
 class LogIn extends React.Component {
   render() {
     return (
-      <div className="row-container">
-        {/* <Correct />
-        <Correct /> */}
-        <div className=".row-col">
-          <Google />
-        </div>
-        <div className=".row-col">
-          <Correct />
+      <div className="full-height">
+        <div className="container">
+          <div className="left-half ">
+            <div className="text">
+              <h1>Welcome to Lango!</h1>
+              <p>Customize your vocabulary</p>
+            </div>
+          </div>
+          <div className="right-half ">
+            <Google />
+          </div>
         </div>
       </div>
     );
   }
 }
-
 ReactDOM.render(
   <Answer question="Hola Como Esta?" input="Hello! How are you?" />,
   document.getElementById("root")
 );
+// ReactDOM.render(
+//   <FirstTime question="Hola Como Esta?" input="Hello! How are you?" />,
+//   document.getElementById("root")
+// );
 // ReactDOM.render(<LogIn />, document.getElementById("root"));
