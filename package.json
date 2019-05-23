@@ -5,6 +5,8 @@
   "main": "miniServer3.js",
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2",
     "express": "^4.16.4",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",

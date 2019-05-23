@@ -27,14 +27,14 @@ export function makeCorsRequest() {
       let object = JSON.parse(responseStr); // turn it into an object
       // console.log(JSON.stringify(object, undefined, 2));  // print it out as a string, nicely formatted
       let myWord = JSON.stringify(object.Spanish, undefined, 2);
-      myTranslation = myWord;
+      let myTranslation = myWord;
       // console.log(myWord);
       document.getElementById("outputGoesHere").innerHTML = myWord;
     };
 
     xhr.onerror = function() {
       alert("Woops, there was an error making the request.");
-    };
+    }; 
 
     // Actually send request to server
     xhr.send();
@@ -76,9 +76,9 @@ export function makeCorsRequestStore() {
   xhr.send();
 }
 
-export function add(){
-  console.log("HELLLLOOO");
-}
+// export function add(){
+//   console.log("HELLLLOOO");
+// }
 
 // run this code to make request when this script file gets executed
 //makeCorsRequest();

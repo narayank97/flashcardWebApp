@@ -1,13 +1,14 @@
 //https://stackoverflow.com/questions/38467574/import-javascript-file-and-call-functions-using-webpack-es6-reactjs
 // import React from "react";
+import {makeCorsRequest, makeCorsRequestStore}  from './makeRequest.js';
 // import ReactDOM from "react-dom";
 // import makeRequest  from './makeRequest';
-import {add} from './makeRequest';
+// import {add} from './makeRequest';
 class Title extends React.Component {
   render() {
     return (
       <div className="title">
-        <Button class="button-blue" text="Add" />
+        <Button class="button-blue" text={this.props.btntext} />
         <h1>Lango!</h1>
       </div>
     );
@@ -59,8 +60,7 @@ class Answer extends React.Component {
   render() {
     return (
       <div className="col">
-        <Title />
-        {/* <Button class="button-blue" text="Add" /> */}
+        <Title btntext="Add" />
         <div className="column-container">
           <div className="big-card">
             <div className="refresh">
@@ -83,23 +83,23 @@ class Answer extends React.Component {
 
 class FirstTime extends React.Component {
   // onpress = makeCorsRequest();
+  // handleKeyPress = makeCorsRequest; 
   render() {
     return (
       <div className="col">
-        <Title />
+        <Title btntext="Start Review" />
         {/* <Button class="button-blue" text="Add" /> */}
         <div className="column-container">
           <div className="row-container">
             <div className="medium-card">
-              {/* <input id="myWord" onKeyPress={makeCorsRequest()} /> */}
+              <input id="myWord" onKeyPress={makeCorsRequest} />
             </div>
             <div className="medium-card">
               <p id="outputGoesHere" />
-              {/* <p>{this.props.input}</p> */}
             </div>
           </div>
           <div className="btn-container">
-            <Button class="button-green " text="Next" />
+            <Button class="button-green " text="Save" />
           </div>
         </div>
         <Footer username="Daniel" />
@@ -132,7 +132,7 @@ class LogIn extends React.Component {
 //   document.getElementById("root")
 // );
 ReactDOM.render(
-  <FirstTime question="Hola Como Esta?" input="Hello! How are you?" />,
+  <FirstTime  />,
   document.getElementById("root")
 );
 // ReactDOM.render(<LogIn />, document.getElementById("root"));
