@@ -76,11 +76,3 @@ export function makeCorsRequestStore() {
   xhr.send();
 }
 
-// export function add(){
-//   console.log("HELLLLOOO");
-// }
-
-// run this code to make request when this script file gets executed
-//makeCorsRequest();
-// export makeCorsRequestStore();
-// export makeCorsRequest();

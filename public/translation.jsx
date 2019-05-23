@@ -1,9 +1,5 @@
-//https://stackoverflow.com/questions/38467574/import-javascript-file-and-call-functions-using-webpack-es6-reactjs
-// import React from "react";
 import {makeCorsRequest, makeCorsRequestStore}  from './makeRequest.js';
-// import ReactDOM from "react-dom";
-// import makeRequest  from './makeRequest';
-// import {add} from './makeRequest';
+
 class Title extends React.Component {
   render() {
     return (
@@ -125,12 +121,18 @@ class LogIn extends React.Component {
     );
   }
 }
-// ReactDOM.render(
-//   <Answer question="Hola Como Esta?" input="Hello! How are you?" />,
-//   document.getElementById("root")
-// );
+// ANSWER PAGE
+/*
+ReactDOM.render(
+  <Answer question="Hola Como Esta?" input="Hello! How are you?" />,
+  document.getElementById("root")
+);
+*/
+// FIRST TIME PAGE
 ReactDOM.render(
   <FirstTime  />,
   document.getElementById("root")
 );
+
+// LOGIN PAGE
 // ReactDOM.render(<LogIn />, document.getElementById("root"));

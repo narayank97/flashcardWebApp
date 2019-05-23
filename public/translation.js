@@ -6,12 +6,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//https://stackoverflow.com/questions/38467574/import-javascript-file-and-call-functions-using-webpack-es6-reactjs
-// import React from "react";
 import { makeCorsRequest, makeCorsRequestStore } from './makeRequest.js';
-// import ReactDOM from "react-dom";
-// import makeRequest  from './makeRequest';
-// import {add} from './makeRequest';
 
 var Title = function (_React$Component) {
   _inherits(Title, _React$Component);
@@ -301,11 +296,17 @@ var LogIn = function (_React$Component8) {
 
   return LogIn;
 }(React.Component);
-// ReactDOM.render(
-//   <Answer question="Hola Como Esta?" input="Hello! How are you?" />,
-//   document.getElementById("root")
-// );
+// ANSWER PAGE
+/*
+ReactDOM.render(
+  <Answer question="Hola Como Esta?" input="Hello! How are you?" />,
+  document.getElementById("root")
+);
+*/
+// FIRST TIME PAGE
 
 
 ReactDOM.render(React.createElement(FirstTime, null), document.getElementById("root"));
+
+// LOGIN PAGE
 // ReactDOM.render(<LogIn />, document.getElementById("root"));

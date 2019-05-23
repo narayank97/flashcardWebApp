@@ -14,7 +14,6 @@ body {
 .column-container {
   flex: 1;
   height: 100%;
-  /* width: 60em; */
   width: calc(100vw * (13 / 16));
   max-width: calc(60em * (15 / 16));
   margin: 0 auto;
@@ -23,7 +22,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* border: 2px solid red; */
 }
 
 .row-container {
@@ -51,7 +49,6 @@ body {
   width: 100vw;
   display: flex;
   flex-direction: column;
-  /* border: 2px solid red; */
 }
 
 .btn-container {
@@ -67,7 +64,6 @@ body {
 }
 .container {
   display: flex;
-  /* flex-wrap: wrap; */
 }
 .left-half,
 .right-half {
@@ -159,17 +155,13 @@ body {
 .title {
   display: block;
   display: flex;
-  /* flex: 1 2; */
-  width: 90%;
-  /* text-align: center; */
+  width: 85%;
   color: #4c6baf;
   margin-bottom: 3em;
 }
 
 .title h1 {
-  /* float: right; */
   flex: 1;
-  /* margin-left: 30%; */
   text-align: center;
   width: 100%;
   font-family: "Raleway", sans-serif;
@@ -207,7 +199,6 @@ body {
 
 .big-card .refresh {
   position: relative;
-  /* border: 2px solid green; */
   top: -45%;
 }
 
@@ -282,13 +273,18 @@ input:focus {
   outline: none;
 }
 
+input.break {
+  word-wrap: break-word;
+  word-break: break-all;
+  height: 80px;
+}
+
 @media screen and (max-width: 500px) {
   .row-container {
     flex-direction: column;
   }
   .medium-card {
     width: 95%;
-    /* height: 10em; */
   }
 }
 
@@ -307,10 +303,6 @@ input:focus {
 }
 
 .button-blue {
-  /* position: absolute;
-  top: 0.5em;
-  left: 2em; */
-
   margin: auto;
   margin-left: 3%;
   background-color: #4c6baf;
