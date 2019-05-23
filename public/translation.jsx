@@ -1,3 +1,8 @@
+//https://stackoverflow.com/questions/38467574/import-javascript-file-and-call-functions-using-webpack-es6-reactjs
+// import React from "react";
+// import ReactDOM from "react-dom";
+// import makeRequest  from './makeRequest';
+import {add} from './makeRequest';
 class Title extends React.Component {
   render() {
     return (
@@ -77,6 +82,7 @@ class Answer extends React.Component {
 }
 
 class FirstTime extends React.Component {
+  // onpress = makeCorsRequest();
   render() {
     return (
       <div className="col">
@@ -85,10 +91,11 @@ class FirstTime extends React.Component {
         <div className="column-container">
           <div className="row-container">
             <div className="medium-card">
-              <p>{this.props.question}</p>
+              {/* <input id="myWord" onKeyPress={makeCorsRequest()} /> */}
             </div>
             <div className="medium-card">
-              <p>{this.props.input}</p>
+              <p id="outputGoesHere" />
+              {/* <p>{this.props.input}</p> */}
             </div>
           </div>
           <div className="btn-container">
@@ -120,12 +127,12 @@ class LogIn extends React.Component {
     );
   }
 }
-ReactDOM.render(
-  <Answer question="Hola Como Esta?" input="Hello! How are you?" />,
-  document.getElementById("root")
-);
 // ReactDOM.render(
-//   <FirstTime question="Hola Como Esta?" input="Hello! How are you?" />,
+//   <Answer question="Hola Como Esta?" input="Hello! How are you?" />,
 //   document.getElementById("root")
 // );
+ReactDOM.render(
+  <FirstTime question="Hola Como Esta?" input="Hello! How are you?" />,
+  document.getElementById("root")
+);
 // ReactDOM.render(<LogIn />, document.getElementById("root"));

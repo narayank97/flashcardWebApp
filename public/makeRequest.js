@@ -9,7 +9,7 @@ function createCORSRequest(method, url) {
 }
 
 // Make the actual CORS request.
-function makeCorsRequest() {
+export function makeCorsRequest() {
   if (event.keyCode == 13) {
     let input = document.getElementById("myWord").value;
     let url = "translate?english=" + input;
@@ -47,7 +47,7 @@ function insertCallback(err) {
   }
 }
 
-function makeCorsRequestStore() {
+export function makeCorsRequestStore() {
   let eng = document.getElementById("myWord").value;
   let span = document.getElementById("outputGoesHere").innerHTML;
 
@@ -76,5 +76,11 @@ function makeCorsRequestStore() {
   xhr.send();
 }
 
+export function add(){
+  console.log("HELLLLOOO");
+}
+
 // run this code to make request when this script file gets executed
 //makeCorsRequest();
+// export makeCorsRequestStore();
+// export makeCorsRequest();

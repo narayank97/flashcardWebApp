@@ -1,37 +1,32 @@
-<!doctype HTML>
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Spanish Translator</title>
+    <link rel="stylesheet" type="text/css" href="reset.css" />
+  </head>
 
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<title>Spanish Translator</title>
-<link rel="stylesheet" type="text/css" href="reset.css">
-</head>
+  <body>
+    <header>
+      <h2>Spanish Translator</h2>
+    </header>
 
-<body>
+    <main>
+      <div id="inputDiv">
+        <input id="myWord" onkeypress="makeCorsRequest()" />
+        <button onclick="makeCorsRequestStore()" id="store">
+          <p>store</p>
+        </button>
+      </div>
+      <div id="outputDiv">
+        <p id="outputGoesHere"></p>
+      </div>
+      <div id="storeoutputDiv">
+        <p id="storeoutputGoesHere"></p>
+      </div>
+    </main>
 
-<header>
-<h2>Spanish Translator</h2>
-</header>
-
-<main>
-<div id="inputDiv">
-<<<<<<< HEAD
-  <input id="myWord">
-  <button onclick="makeCorsRequest()" id="submit" > <p>submit</p></button>
-=======
-  <input id="myWord" onkeypress="makeCorsRequest()">
->>>>>>> d9de0eb07600dd19900ea0479e71b3966f26bca4
-  <button onclick="makeCorsRequestStore()" id="store" > <p>store</p></button>
-</div>
-<div id="outputDiv">
-  <p id="outputGoesHere"></p>
-</div>
-<div id="storeoutputDiv">
-    <p id="storeoutputGoesHere"></p>
-  </div>
-</main>
-
-<script src="makeRequest.js"></script>
-</body>
+    <script src="makeRequest.js" type="module"></script>
+  </body>
 </html>
