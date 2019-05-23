@@ -55,7 +55,7 @@ var Button = function (_React$Component2) {
     value: function render() {
       return React.createElement(
         "div",
-        { className: this.props.class },
+        { className: this.props.class, onClick: this.props.click },
         React.createElement(
           "p",
           null,
@@ -217,9 +217,6 @@ var FirstTime = function (_React$Component7) {
 
   _createClass(FirstTime, [{
     key: "render",
-
-    // onpress = makeCorsRequest();
-    // handleKeyPress = makeCorsRequest; 
     value: function render() {
       return React.createElement(
         "div",
@@ -245,7 +242,7 @@ var FirstTime = function (_React$Component7) {
           React.createElement(
             "div",
             { className: "btn-container" },
-            React.createElement(Button, { "class": "button-green ", text: "Save" })
+            React.createElement(Button, { "class": "button-green ", text: "Save", click: makeCorsRequestStore })
           )
         ),
         React.createElement(Footer, { username: "Daniel" })

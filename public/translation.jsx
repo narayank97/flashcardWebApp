@@ -18,7 +18,7 @@ class Title extends React.Component {
 class Button extends React.Component {
   render() {
     return (
-      <div className={this.props.class}>
+      <div className={this.props.class} onClick={this.props.click}>
         <p>{this.props.text}</p>
       </div>
     );
@@ -56,7 +56,7 @@ class Google extends React.Component {
   }
 }
 
-class Answer extends React.Component {
+class Answer extends React.Component { 
   render() {
     return (
       <div className="col">
@@ -82,8 +82,6 @@ class Answer extends React.Component {
 }
 
 class FirstTime extends React.Component {
-  // onpress = makeCorsRequest();
-  // handleKeyPress = makeCorsRequest; 
   render() {
     return (
       <div className="col">
@@ -99,7 +97,7 @@ class FirstTime extends React.Component {
             </div>
           </div>
           <div className="btn-container">
-            <Button class="button-green " text="Save" />
+            <Button class="button-green " text="Save" click={makeCorsRequestStore}/>
           </div>
         </div>
         <Footer username="Daniel" />
