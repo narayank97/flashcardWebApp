@@ -306,7 +306,6 @@ function fileNotFound(req, res) {
 }
 
 // put together the server pipeline
-const app = express()
 app.use(express.static('public'));  // can I find a static file? 
 app.get('/query', queryHandler);   // if not, is it a valid query?
 app.get('/translate', translateHandler);   // if not, is it a valid translate query?
