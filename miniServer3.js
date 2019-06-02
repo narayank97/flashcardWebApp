@@ -101,7 +101,7 @@ app.get('/query', function (req, res) { res.send('HTTP query!') });
 app.use( fileNotFound );
 
 // Pipeline is ready. Start listening!  
-app.listen(30057, function (){console.log('Listening...');} );
+app.listen(55106, function (){console.log('Listening...');} );
 
 
 // middleware functions
