@@ -1,7 +1,6 @@
 const express = require('express')
 const port = 55106 // you need to put your port number here
 let myFlashCardObj;
-const express = require('express');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
 
