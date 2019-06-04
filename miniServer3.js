@@ -150,8 +150,20 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     // should be key to get user out of database.
 
     let dbRowID = profile.id;  // temporary! Should be the real unique
+    let userFirstName = profile.name.givenName;
+    let userLastName = profile.name.familyName;
     console.log("HELLOOOOOO");
     console.log(dbRowID);
+    console.log(userFirstName);
+    console.log(userLastName);
+
+    const sqlite3 = require("sqlite3").verbose();  // use sqlite
+    const fs = require("fs"); // file system
+    const dbFileName = "Users.db";
+    // makes the object that represents the database in our code
+    const db = new sqlite3.Database(dbFileName);  // object, not database.
+    const cmdStr = 'INSERT into Users (googleID,firstName,lastName) VALUES (@0, @1, @2)';
+    db.run(cmdStr, dbRowID, userFirstName, userLastName, insertCallback);
     // key for db Row for this user in DB table.
     // Note: cannot be zero, has to be something that evaluates to
     // True.  
