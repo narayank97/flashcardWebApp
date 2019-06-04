@@ -157,18 +157,32 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     console.log(userFirstName);
     console.log(userLastName);
 
-    const sqlite3 = require("sqlite3").verbose();  // use sqlite
-    const fs = require("fs"); // file system
-    const dbFileName = "Users.db";
-    // makes the object that represents the database in our code
-    const db = new sqlite3.Database(dbFileName);  // object, not database.
-    const cmdStr = 'INSERT into Users (googleID,firstName,lastName) VALUES (@0, @1, @2)';
-    db.run(cmdStr, dbRowID, userFirstName, userLastName, insertCallback);
+    const checkUser = 'SELECT * FROM Users WHERE googleID = '+ profile.id;
+    db.run(checkUser, function userCheckCallback(err){
+        if(err){
+            const sqlite3 = require("sqlite3").verbose();  // use sqlite
+            const fs = require("fs"); // file system
+            const dbFileName = "Users.db";
+            // makes the object that represents the database in our code
+            const db = new sqlite3.Database(dbFileName);  // object, not database.
+            const cmdStr = 'INSERT into Users (googleID,firstName,lastName) VALUES (@0, @1, @2)';
+            db.run(cmdStr, dbRowID, userFirstName, userLastName, insertCallback);
+            done(null, dbRowID); 
+            console.log("Check error -> ", err);
+        } 
+        else {
+            console.log("Entry exists");
+            console.log("Checked correctly");
+        }   
+
+    }); 
+
+    
     // key for db Row for this user in DB table.
     // Note: cannot be zero, has to be something that evaluates to
     // True.  
 
-    done(null, dbRowID); 
+    
 }
 
 // Part of Server's sesssion set-up.  
