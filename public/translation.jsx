@@ -101,7 +101,7 @@ class CardTextarea extends React.Component {
           name={this.props.name}
           id={this.props.id}
           placeholder={this.props.placeholder}
-          required
+          required 
         />
       </fieldset>
     );

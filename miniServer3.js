@@ -337,6 +337,25 @@ function fileNotFound(req, res) {
 
 // put together the server pipeline
 app.use(express.static('public'));  // can I find a static file? 
+
+// app.get('start_review', function (req, res) {
+//     res.send('Hello World!')
+//     // res.sendfile(__dirname + '/public/index.html');
+//     // console.log(__dirname + '/public/index.html');
+// }); 
+
+// app.get('add', function (req, res) {
+//     res.send('Hello World!')
+//     // res.sendfile(__dirname + '/public/index.html');
+//     // console.log(__dirname + '/public/index.html');
+// }); 
+
+// app.get('/start_review', function (req, res) {
+//     res.send('/')
+// })
+// app.get('/add', function (req, res) {
+//     res.send('/')
+// })
 app.get('/query', queryHandler);   // if not, is it a valid query?
 app.get('/translate', translateHandler);   // if not, is it a valid translate query?
 app.get('/store', storeHandler);   // if not, is it a valid store query?

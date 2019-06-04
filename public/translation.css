@@ -337,11 +337,11 @@ textarea {
 }
 
 .card-container.flipped .side-front {
-    transform: rotateY(180deg);
-  }
- .card-container.flipped .side-back {
-    transform: rotateY(0deg);
-  }
+  transform: rotateY(180deg);
+}
+.card-container.flipped .side-back {
+  transform: rotateY(0deg);
+}
 
 /* CORRECT */
 .correct {
