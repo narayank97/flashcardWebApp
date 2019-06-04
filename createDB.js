@@ -3,14 +3,18 @@ const sqlite3 = require("sqlite3").verbose();  // use sqlite
 const fs = require("fs"); // file system
 
 const dbFileName = "Flashcards.db";
+const dbFileName2 = "Users.db";
 // makes the object that represents the database in our code
 const db = new sqlite3.Database(dbFileName);  // object, not database.
+const db2 = new sqlite3.Database(dbFileName2);  // object, not database.
 
 // Initialize table.
 // If the table already exists, causes an error.
 // Fix the error by removing or renaming Flashcards.db
-const cmdStr = 'CREATE TABLE Flashcards (user INT, english TEXT, spanish TEXT, seen INT, correct INT)';
+const cmdStr = 'CREATE TABLE Flashcards (googleID INT PRIMARY KEY, user INT, english TEXT, spanish TEXT, seen INT, correct INT)';
+const cmdStr2 = 'CREATE TABLE Users (googleID INT PRIMARY KEY,firstName CHAR(25), lastName CHAR(25))';
 db.run(cmdStr,tableCreationCallback);
+db2.run(cmdStr2,tableCreationCallback);
 
 // Always use the callback for database operations and print out any
 // error messages you get.
@@ -20,6 +24,7 @@ function tableCreationCallback(err) {
 	    console.log("Table creation error",err);
     } else {
 	    console.log("Database created");
-	    db.close();
+        db.close();
+        db2.close();
     }
 }
