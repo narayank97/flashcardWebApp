@@ -8,6 +8,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import { makeCorsRequest, makeCorsRequestStore } from "./makeRequest.js";
 
+var Router = ReactRouter.Router;
+var Route = ReactRouter.Route;
+var IndexRoute = ReactRouter.IndexRoute;
+var Link = ReactRouter.Link;
+var browserHistory = ReactRouter.browserHistory;
+
 var Title = function (_React$Component) {
   _inherits(Title, _React$Component);
 
@@ -18,12 +24,17 @@ var Title = function (_React$Component) {
   }
 
   _createClass(Title, [{
+    key: "btnClick",
+    value: function btnClick() {
+      browserHistory.push(this.props.btnpath);
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
         "div",
         { className: "title" },
-        React.createElement(Button, { "class": "button-blue", text: this.props.btntext }),
+        React.createElement(Button, { "class": "button-blue", text: this.props.btntext, btnpath: this.props.btnpath, btnClick: this.btnClick }),
         React.createElement(
           "h1",
           null,
@@ -46,11 +57,22 @@ var Button = function (_React$Component2) {
   }
 
   _createClass(Button, [{
+    key: "btnClickAdd",
+    value: function btnClickAdd() {
+      browserHistory.push("/add");
+    }
+  }, {
+    key: "btnClickReview",
+    value: function btnClickReview() {
+      browserHistory.push("/start_review");
+    }
+  }, {
     key: "render",
     value: function render() {
+      console.log(this.props.btnpath);
       return React.createElement(
         "div",
-        { className: this.props.class, onClick: this.props.click },
+        { className: this.props.class, onClick: this.props.btnpath === "add" ? this.btnClickAdd : this.btnClickReview },
         React.createElement(
           "p",
           null,
@@ -323,7 +345,10 @@ var Card = function (_React$Component11) {
     value: function render() {
       return React.createElement(
         "div",
-        { onClick: this.flip, className: "card-container" + (this.state.flipped ? " flipped" : "") },
+        {
+          onClick: this.flip,
+          className: "card-container" + (this.state.flipped ? " flipped" : "")
+        },
         React.createElement(
           "div",
           { className: "card-body" },
@@ -352,7 +377,7 @@ var StartReview = function (_React$Component12) {
       return React.createElement(
         "div",
         { className: "col" },
-        React.createElement(Title, { btntext: "Add" }),
+        React.createElement(Title, { btntext: "Add", btnpath: "add" }),
         React.createElement(
           "div",
           { className: "column-container" },
@@ -391,7 +416,7 @@ var AddPage = function (_React$Component13) {
       return React.createElement(
         "div",
         { className: "col" },
-        React.createElement(Title, { btntext: "Start Review" }),
+        React.createElement(Title, { btntext: "Start Review", btnpath: "review" }),
         React.createElement(
           "div",
           { className: "column-container" },
@@ -476,9 +501,22 @@ var LogIn = function (_React$Component14) {
   return LogIn;
 }(React.Component);
 
+ReactDOM.render(React.createElement(
+  Router,
+  { history: browserHistory },
+  React.createElement(Route, { path: "/start_review", component: StartReview }),
+  React.createElement(Route, { path: "/add", component: AddPage }),
+  React.createElement(Route, { path: "*", component: StartReview })
+), document.getElementById('root'));
+
+// ReactDOM.render(<App />, document.getElementById('root'));
+
 // StartReview PAGE
 
-ReactDOM.render(React.createElement(StartReview, { question: "Hola Como Esta?", input: "Hello! How are you?" }), document.getElementById("root"));
+// ReactDOM.render(
+//   <StartReview question="Hola Como Esta?" input="Hello! How are you?" />,
+//   document.getElementById("root")
+// );
 
 // FIRST TIME PAGE
 // ReactDOM.render(

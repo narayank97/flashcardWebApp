@@ -1,10 +1,20 @@
 import { makeCorsRequest, makeCorsRequestStore } from "./makeRequest.js";
 
+
+var Router = ReactRouter.Router;
+var Route = ReactRouter.Route;
+var IndexRoute = ReactRouter.IndexRoute;
+var Link = ReactRouter.Link;
+var browserHistory = ReactRouter.browserHistory;
+
 class Title extends React.Component {
+  btnClick() {
+    browserHistory.push(this.props.btnpath);
+  }
   render() {
     return (
       <div className="title">
-        <Button class="button-blue" text={this.props.btntext} />
+        <Button class="button-blue" text={this.props.btntext} btnpath={this.props.btnpath} btnClick={this.btnClick} />
         <h1>Lango!</h1>
       </div>
     );
@@ -12,9 +22,17 @@ class Title extends React.Component {
 }
 
 class Button extends React.Component {
+  btnClickAdd() {
+    browserHistory.push("/add");
+  }
+  btnClickReview() {
+    browserHistory.push("/start_review");
+  }
+
   render() {
+    console.log(this.props.btnpath);
     return (
-      <div className={this.props.class} onClick={this.props.click}>
+      <div className={this.props.class} onClick={(this.props.btnpath === "add"? this.btnClickAdd : this.btnClickReview)}>
         <p>{this.props.text}</p>
       </div>
     );
@@ -136,10 +154,13 @@ class Card extends React.Component {
 
   flip = () => {
     this.setState({ flipped: !this.state.flipped });
-  }
+  };
   render() {
     return (
-      <div onClick={this.flip} className={"card-container" + (this.state.flipped ? " flipped" : "")}>
+      <div
+        onClick={this.flip}
+        className={"card-container" + (this.state.flipped ? " flipped" : "")}
+      >
         {/* <div className="card-container"> */}
         <div className="card-body">
           <CardBack text="Correct!" />
@@ -151,11 +172,12 @@ class Card extends React.Component {
   }
 }
 
+
 class StartReview extends React.Component {
   render() {
     return (
       <div className="col">
-        <Title btntext="Add" />
+        <Title btntext="Add" btnpath="add" />
         <div className="column-container">
           {/* <div className="big-card" onClick={this.toggle.bind(this)}> */}
           <Card />
@@ -177,7 +199,7 @@ class AddPage extends React.Component {
   render() {
     return (
       <div className="col">
-        <Title btntext="Start Review" />
+        <Title btntext="Start Review" btnpath="review"/>
         {/* <Button class="button-blue" text="Add" /> */}
         <div className="column-container">
           <div className="row-container">
@@ -223,13 +245,25 @@ class LogIn extends React.Component {
 }
 
 
+ReactDOM.render(
+  <Router history={browserHistory}>
+    <Route path="/start_review" component={StartReview} />
+    <Route path="/add" component={AddPage} />
+    <Route path="*" component={StartReview} />
+  </Router>,
+  document.getElementById('root')
+);
+
+
+
+// ReactDOM.render(<App />, document.getElementById('root'));
 
 // StartReview PAGE
 
-ReactDOM.render(
-  <StartReview question="Hola Como Esta?" input="Hello! How are you?" />,
-  document.getElementById("root")
-);
+// ReactDOM.render(
+//   <StartReview question="Hola Como Esta?" input="Hello! How are you?" />,
+//   document.getElementById("root")
+// );
 
 // FIRST TIME PAGE
 // ReactDOM.render(
