@@ -191,6 +191,7 @@ function gotProfile(accessToken, refreshToken, profile, done) {
 // The second operand of "done" becomes the input to deserializeUser
 // on every subsequent HTTP request with this session's cookie. 
 passport.serializeUser((dbRowID, done) => {
+    
     console.log("SerializeUser. Input is",dbRowID);
     done(null, dbRowID);
 });
@@ -202,11 +203,34 @@ passport.serializeUser((dbRowID, done) => {
 // and can be used by subsequent middleware.
 passport.deserializeUser((dbRowID, done) => {
     console.log("deserializeUser. Input is:", dbRowID);
+    const sqlite3 = require("sqlite3").verbose();  // use sqlite
+    const fs = require("fs"); // file system
+    const dbFileName = "Flashcards.db";
+    // makes the object that represents the database in our code
+    const db = new sqlite3.Database(dbFileName);  // object, not database.
+    const checkFlashcards = 'SELECT * FROM Flashcards WHERE googleID = '+ 116122930341570023991;
+
+    db.get(checkFlashcards, (err, row) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        if (row) {
+            let userData = {userData: row};
+            console.log(userData);
+            done(null, userData);
+        
+        } 
+        else {
+            let userData = {userData: "data from db row goes here"};
+            done(null, userData);
+        // insert the user since you can't find it in the db
+        // You need to call done() here
+        }
+    });
+
     // here is a good place to look up user data in database using
     // dbRowID. Put whatever you want into an object. It ends up
     // as the property "user" of the "req" object. 
-    let userData = {userData: "data from db row goes here"};
-    done(null, userData);
 });
 
 
@@ -313,12 +337,13 @@ function storeHandler(req, res, next) {
     const db = new sqlite3.Database(dbFileName);  // object, not database.
     let url = req.url;
     let wordObj = req.query;
+    let myUsername = 116122930341570023991;
     console.log(wordObj);
     if ((wordObj.english != undefined) && (wordObj.spanish != undefined)) {
         let eng = wordObj.english;
         let span = wordObj.spanish;
-        const cmdStr = 'INSERT into Flashcards (user, english,spanish, seen, correct) VALUES (1, @0, @1, 0, 0)';
-        db.run(cmdStr, eng, span, insertCallback);
+        const cmdStr = 'INSERT into Flashcards (googleID,user, english,spanish, seen, correct) VALUES (@0,1, @1, @2, 0, 0)';
+        db.run(cmdStr,myUsername,eng, span, insertCallback);
         console.log("We're in boyz");
         dumpDB(); 
         res.json("We put it in the database ");
