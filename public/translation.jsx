@@ -128,9 +128,19 @@ class CardBack extends React.Component {
 
 // React component for the card (main component)
 class Card extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { flipped: false };
+    this.flip = this.flip.bind(this);
+  }
+
+  flip = () => {
+    this.setState({ flipped: !this.state.flipped });
+  }
   render() {
     return (
-      <div className="card-container">
+      <div onClick={this.flip} className={"card-container" + (this.state.flipped ? " flipped" : "")}>
+        {/* <div className="card-container"> */}
         <div className="card-body">
           <CardBack text="Correct!" />
 
@@ -211,6 +221,9 @@ class LogIn extends React.Component {
     );
   }
 }
+
+
+
 // ANSWER PAGE
 
 ReactDOM.render(

@@ -235,6 +235,8 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2em;
+  transform-style: preserve-3d;
+  box-sizing: border-box;
 }
 
 /*- Card body -*/
@@ -246,7 +248,7 @@ body {
   transition: all 0.7s linear;
 }
 
-/*- Flipping the card -*/
+/*- Flipping the card -
 .card-container:hover .card-body {
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
@@ -257,9 +259,12 @@ body {
   visibility: hidden;
   transition: opacity 1s ease-in, visibility 0.75s linear;
 }
+*/
 
 /*- Card sides -*/
 .card-side {
+  box-sizing: border-box;
+  display: block;
   position: absolute;
   top: 0;
   overflow: hidden;
@@ -271,15 +276,24 @@ body {
   backface-visibility: hidden;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 1.02);
+
+  transform-style: preserve-3d;
+  transition: -webkit-transform ease 1000ms;
+  transition: transform ease 1000ms;
+}
+
+.side-front {
+  z-index: 2;
+  transform: rotateY(0deg);
 }
 
 /*- Back side -*/
 .side-back {
-  z-index: 2;
+  /* z-index: 2; */
   /* padding: 32px; */
   text-align: center;
-  -webkit-transform: rotateY(180deg);
-  transform: rotateY(180deg);
+  -webkit-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
 }
 
 input,
@@ -321,6 +335,13 @@ textarea {
   right: 1em;
   width: 3em;
 }
+
+.card-container.flipped .side-front {
+    transform: rotateY(180deg);
+  }
+ .card-container.flipped .side-back {
+    transform: rotateY(0deg);
+  }
 
 /* CORRECT */
 .correct {

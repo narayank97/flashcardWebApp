@@ -304,10 +304,18 @@ var CardBack = function (_React$Component10) {
 var Card = function (_React$Component11) {
   _inherits(Card, _React$Component11);
 
-  function Card() {
+  function Card(props) {
     _classCallCheck(this, Card);
 
-    return _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).apply(this, arguments));
+    var _this11 = _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).call(this, props));
+
+    _this11.flip = function () {
+      _this11.setState({ flipped: !_this11.state.flipped });
+    };
+
+    _this11.state = { flipped: false };
+    _this11.flip = _this11.flip.bind(_this11);
+    return _this11;
   }
 
   _createClass(Card, [{
@@ -315,7 +323,7 @@ var Card = function (_React$Component11) {
     value: function render() {
       return React.createElement(
         "div",
-        { className: "card-container" },
+        { onClick: this.flip, className: "card-container" + (this.state.flipped ? " flipped" : "") },
         React.createElement(
           "div",
           { className: "card-body" },
@@ -467,6 +475,7 @@ var LogIn = function (_React$Component14) {
 
   return LogIn;
 }(React.Component);
+
 // ANSWER PAGE
 
 ReactDOM.render(React.createElement(Answer, { question: "Hola Como Esta?", input: "Hello! How are you?" }), document.getElementById("root"));
