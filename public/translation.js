@@ -337,16 +337,16 @@ var Card = function (_React$Component11) {
   return Card;
 }(React.Component);
 
-var Answer = function (_React$Component12) {
-  _inherits(Answer, _React$Component12);
+var StartReview = function (_React$Component12) {
+  _inherits(StartReview, _React$Component12);
 
-  function Answer() {
-    _classCallCheck(this, Answer);
+  function StartReview() {
+    _classCallCheck(this, StartReview);
 
-    return _possibleConstructorReturn(this, (Answer.__proto__ || Object.getPrototypeOf(Answer)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (StartReview.__proto__ || Object.getPrototypeOf(StartReview)).apply(this, arguments));
   }
 
-  _createClass(Answer, [{
+  _createClass(StartReview, [{
     key: "render",
     value: function render() {
       return React.createElement(
@@ -373,19 +373,19 @@ var Answer = function (_React$Component12) {
     }
   }]);
 
-  return Answer;
+  return StartReview;
 }(React.Component);
 
-var FirstTime = function (_React$Component13) {
-  _inherits(FirstTime, _React$Component13);
+var AddPage = function (_React$Component13) {
+  _inherits(AddPage, _React$Component13);
 
-  function FirstTime() {
-    _classCallCheck(this, FirstTime);
+  function AddPage() {
+    _classCallCheck(this, AddPage);
 
-    return _possibleConstructorReturn(this, (FirstTime.__proto__ || Object.getPrototypeOf(FirstTime)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (AddPage.__proto__ || Object.getPrototypeOf(AddPage)).apply(this, arguments));
   }
 
-  _createClass(FirstTime, [{
+  _createClass(AddPage, [{
     key: "render",
     value: function render() {
       return React.createElement(
@@ -424,7 +424,7 @@ var FirstTime = function (_React$Component13) {
     }
   }]);
 
-  return FirstTime;
+  return AddPage;
 }(React.Component);
 
 var LogIn = function (_React$Component14) {
@@ -476,13 +476,13 @@ var LogIn = function (_React$Component14) {
   return LogIn;
 }(React.Component);
 
-// ANSWER PAGE
+// StartReview PAGE
 
-ReactDOM.render(React.createElement(Answer, { question: "Hola Como Esta?", input: "Hello! How are you?" }), document.getElementById("root"));
+ReactDOM.render(React.createElement(StartReview, { question: "Hola Como Esta?", input: "Hello! How are you?" }), document.getElementById("root"));
 
 // FIRST TIME PAGE
 // ReactDOM.render(
-//   <FirstTime  />,
+//   <AddPage  />,
 //   document.getElementById("root")
 // );
 

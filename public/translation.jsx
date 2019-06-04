@@ -151,7 +151,7 @@ class Card extends React.Component {
   }
 }
 
-class Answer extends React.Component {
+class StartReview extends React.Component {
   render() {
     return (
       <div className="col">
@@ -173,7 +173,7 @@ class Answer extends React.Component {
   }
 }
 
-class FirstTime extends React.Component {
+class AddPage extends React.Component {
   render() {
     return (
       <div className="col">
@@ -224,16 +224,16 @@ class LogIn extends React.Component {
 
 
 
-// ANSWER PAGE
+// StartReview PAGE
 
 ReactDOM.render(
-  <Answer question="Hola Como Esta?" input="Hello! How are you?" />,
+  <StartReview question="Hola Como Esta?" input="Hello! How are you?" />,
   document.getElementById("root")
 );
 
 // FIRST TIME PAGE
 // ReactDOM.render(
-//   <FirstTime  />,
+//   <AddPage  />,
 //   document.getElementById("root")
 // );
 
