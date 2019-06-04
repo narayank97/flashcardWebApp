@@ -156,6 +156,9 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     console.log(dbRowID);
     console.log(userFirstName);
     console.log(userLastName);
+    const sqlite3 = require("sqlite3").verbose();  // use sqlite
+    const fs = require("fs"); // file system
+   
     const dbFileName = "Users.db";
     // makes the object that represents the database in our code
     const db = new sqlite3.Database(dbFileName);  // object, not database.
@@ -163,9 +166,7 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     const checkUser = 'SELECT * FROM Users WHERE googleID = '+ profile.id;
     db.run(checkUser, function userCheckCallback(err){
         if(err){
-            const sqlite3 = require("sqlite3").verbose();  // use sqlite
-            const fs = require("fs"); // file system
-           
+          
             const cmdStr = 'INSERT into Users (googleID,firstName,lastName) VALUES (@0, @1, @2)';
             db.run(cmdStr, dbRowID, userFirstName, userLastName, insertCallback);
             done(null, dbRowID); 
