@@ -156,13 +156,12 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     console.log(dbRowID);
     console.log(userFirstName);
     console.log(userLastName);
+    
     const sqlite3 = require("sqlite3").verbose();  // use sqlite
     const fs = require("fs"); // file system
-   
     const dbFileName = "Users.db";
     // makes the object that represents the database in our code
     const db = new sqlite3.Database(dbFileName);  // object, not database.
-
     const checkUser = 'SELECT * FROM Users WHERE googleID = '+ profile.id;
     db.run(checkUser, function userCheckCallback(err){
         if(err){
@@ -175,6 +174,7 @@ function gotProfile(accessToken, refreshToken, profile, done) {
         else {
             console.log("Entry exists");
             console.log("Checked correctly");
+            done(null, dbRowID); 
         }   
 
     }); 
