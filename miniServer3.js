@@ -173,12 +173,14 @@ function gotProfile(accessToken, refreshToken, profile, done) {
             const cmdStr = 'INSERT into Users (googleID,firstName,lastName) VALUES (@0, @1, @2)';
             db.run(cmdStr, dbRowID, userFirstName, userLastName, insertCallback);
             done(null, dbRowID); 
+            
             console.log("Check error -> ", err);
         } 
         else {
             console.log("Entry exists");
             console.log("Checked correctly");
             done(null, dbRowID); 
+            console.log("daniels");
         }   
 
     }); 
