@@ -23,6 +23,8 @@ function makeCorsRequest() {
   // Load some functions into response handlers.
   xhr.onload = function() {
       let responseStr = xhr.responseText;  // get the JSON string 
+      console.log("HELLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+      console.log(responseStr);
       let object = JSON.parse(responseStr);  // turn it into an object
       // console.log(JSON.stringify(object, undefined, 2));  // print it out as a string, nicely formatted
       let myWord = JSON.stringify(object.Spanish, undefined, 2);
