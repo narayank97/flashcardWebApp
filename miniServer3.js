@@ -215,6 +215,7 @@ passport.deserializeUser((dbRowID, done) => {
             return console.error(err.message);
         }
         if (row) {
+            console.log("HELLLOOOOO");
             let userData = {userData: row};
             console.log("YEET "+userData);
             done(null, userData);
