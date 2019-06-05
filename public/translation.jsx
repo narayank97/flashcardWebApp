@@ -1,4 +1,8 @@
-import { makeCorsRequest, makeCorsRequestStore } from "./makeRequest.js";
+import {
+  makeCorsRequest,
+  makeCorsRequestStore,
+  renderStartReview
+} from "./makeRequest.js";
 
 
 var Router = ReactRouter.Router;
@@ -32,7 +36,7 @@ class Button extends React.Component {
   render() {
     console.log(this.props.btnpath);
     return (
-      <div className={this.props.class} onClick={(this.props.click) ? this.props.click : ((this.props.btnpath === "add"? this.btnClickAdd : this.btnClickReview))}>
+      <div className={this.props.class} onClick={(this.props.click) ? this.props.click : ((this.props.btnpath === "add" ? this.btnClickAdd : this.btnClickReview))}>
         <p>{this.props.text}</p>
       </div>
     );
@@ -101,7 +105,7 @@ class CardTextarea extends React.Component {
           name={this.props.name}
           id={this.props.id}
           placeholder={this.props.placeholder}
-          required 
+          required
         />
       </fieldset>
     );
@@ -174,6 +178,18 @@ class Card extends React.Component {
 
 
 class StartReview extends React.Component {
+  // constructor(props){
+  //   super(props);
+  //   this.state = {
+  //     data: 'Jordan Belfort'
+  //   }
+  // }
+
+  // componentDidMount() {
+  //   this. makeRequest(... , callBackFunction) //very important,because js is async 
+
+  // } 
+
   render() {
     return (
       <div className="col">
@@ -186,7 +202,7 @@ class StartReview extends React.Component {
             {/* <p>{this.props.input}</p> */}
           </div>
           <div className="btn-container">
-            <Button class="button-green " text="Next" />
+            <Button class="button-green " text="Next" click={renderStartReview} />
           </div>
         </div>
         <Footer username="Daniel" />
@@ -199,7 +215,7 @@ class AddPage extends React.Component {
   render() {
     return (
       <div className="col">
-        <Title btntext="Start Review" btnpath="review"/>
+        <Title btntext="Start Review" btnpath="review" />
         {/* <Button class="button-blue" text="Add" /> */}
         <div className="column-container">
           <div className="row-container">
@@ -249,6 +265,7 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/start_review" component={StartReview} />
     <Route path="/add" component={AddPage} />
+    <Route path='/login.html' component={LogIn} />
     <Route path="*" component={StartReview} />
   </Router>,
   document.getElementById('root')

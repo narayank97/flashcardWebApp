@@ -6,7 +6,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import { makeCorsRequest, makeCorsRequestStore } from "./makeRequest.js";
+import { makeCorsRequest, makeCorsRequestStore, renderStartReview } from "./makeRequest.js";
 
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
@@ -373,6 +373,19 @@ var StartReview = function (_React$Component12) {
 
   _createClass(StartReview, [{
     key: "render",
+
+    // constructor(props){
+    //   super(props);
+    //   this.state = {
+    //     data: 'Jordan Belfort'
+    //   }
+    // }
+
+    // componentDidMount() {
+    //   this. makeRequest(... , callBackFunction) //very important,because js is async 
+
+    // } 
+
     value: function render() {
       return React.createElement(
         "div",
@@ -390,7 +403,7 @@ var StartReview = function (_React$Component12) {
           React.createElement(
             "div",
             { className: "btn-container" },
-            React.createElement(Button, { "class": "button-green ", text: "Next" })
+            React.createElement(Button, { "class": "button-green ", text: "Next", click: renderStartReview })
           )
         ),
         React.createElement(Footer, { username: "Daniel" })
@@ -506,6 +519,7 @@ ReactDOM.render(React.createElement(
   { history: browserHistory },
   React.createElement(Route, { path: "/start_review", component: StartReview }),
   React.createElement(Route, { path: "/add", component: AddPage }),
+  React.createElement(Route, { path: "/login.html", component: LogIn }),
   React.createElement(Route, { path: "*", component: StartReview })
 ), document.getElementById('root'));
 
