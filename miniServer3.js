@@ -169,7 +169,7 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     const checkUser = 'SELECT * FROM Users WHERE googleID = '+ profile.id;
     db.run(checkUser, function userCheckCallback(err){
         console.log(err);
-        if(null){
+        if(err == null){
              console.log("Entry exists");
             console.log("Checked correctly");
             done(null, dbRowID); 
