@@ -97,6 +97,10 @@ app.get('/user/*',
 // next, all queries (like translate or store or get...
 app.get('/query', function (req, res) { res.send('HTTP query!') });
 
+app.get('/query', queryHandler);   // if not, is it a valid query?
+app.get('/translate', translateHandler);   // if not, is it a valid translate query?
+app.get('/store', storeHandler);   // if not, is it a valid store query?
+
 // finally, not found...applies to everything
 app.use( fileNotFound );
 
