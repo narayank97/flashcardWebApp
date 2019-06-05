@@ -7,6 +7,8 @@ const cookieSession = require('cookie-session');
 const GoogleStrategy = require('passport-google-oauth20');
 const sqlite = require('sqlite3');
 
+let userArr;
+
 // Google login credentials, used when the user contacts
 // Google, to tell them where he is trying to login to, and show
 // that this domain is registered for this service. 
@@ -234,6 +236,7 @@ passport.deserializeUser((dbRowID, done) => {
         if (row) {
             console.log("HELLLOOOOO");
             let userData = {userData: row};
+            userArr.push(row)
             console.log("YEET "+userData);
             done(null, userData);
         
@@ -267,6 +270,12 @@ function queryHandler(req, res, next) {
         next();
     }
 }
+
+function startReviewHandler(req, res, next) {
+    console.log(userArr);
+    res.json(userArr);
+}
+
 
 function translateHandler(req, res, next) {
     const APIrequest = require('request');
@@ -383,6 +392,8 @@ function fileNotFound(req, res) {
 
 // put together the server pipeline
 app.use(express.static('public'));  // can I find a static file? 
+
+app.get('start_review', startReviewHandler);
 
 // app.get('start_review', function (req, res) {
 //     res.send('Hello World!')

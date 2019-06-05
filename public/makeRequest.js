@@ -8,6 +8,27 @@ function createCORSRequest(method, url) {
   return xhr;
 }
 
+// TESTING
+export function renderStartReview() {
+  let url = "start_review";
+  let xhr = createCORSRequest("GET", url);
+  // checking if browser does CORS
+  if (!xhr) {
+    alert("CORS not supported");
+    return;
+  }
+}
+
+export function renderAdd() {
+  let url = "add";
+  let xhr = createCORSRequest("GET", url);
+  // checking if browser does CORS
+  if (!xhr) {
+    alert("CORS not supported");
+    return;
+  }
+}
+
 // Make the actual CORS request.
 export function makeCorsRequest() {
   if (event.keyCode == 13) {
