@@ -339,6 +339,7 @@ function storeHandler(req, res, next) {
     const sqlite3 = require("sqlite3").verbose();  // use sqlite
     const fs = require("fs"); // file system
     const dbFileName = "Flashcards.db";
+    console.log("HI IM IN STORE HANDLER");
     // makes the object that represents the database in our code
     const db = new sqlite3.Database(dbFileName);  // object, not database.
     let url = req.url;
@@ -348,7 +349,7 @@ function storeHandler(req, res, next) {
     if ((wordObj.english != undefined) && (wordObj.spanish != undefined)) {
         let eng = wordObj.english;
         let span = wordObj.spanish;
-        console.log("HI IM IN STORE HANDLER");
+        console.log("HI IM IN STORE HANDLER2222222");
         const cmdStr = 'INSERT into Flashcards (googleID,user, english,spanish, seen, correct) VALUES (@0,1, @1, @2, 0, 0)';
         db.run(cmdStr,myUsername,eng, span, insertCallback);
         console.log("We're in boyz");
