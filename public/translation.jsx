@@ -32,7 +32,7 @@ class Button extends React.Component {
   render() {
     console.log(this.props.btnpath);
     return (
-      <div className={this.props.class} onClick={(this.props.btnpath === "add"? this.btnClickAdd : this.btnClickReview)}>
+      <div className={this.props.class} onClick={(this.props.click) ? this.props.click : ((this.props.btnpath === "add"? this.btnClickAdd : this.btnClickReview))}>
         <p>{this.props.text}</p>
       </div>
     );

@@ -72,7 +72,7 @@ var Button = function (_React$Component2) {
       console.log(this.props.btnpath);
       return React.createElement(
         "div",
-        { className: this.props.class, onClick: this.props.btnpath === "add" ? this.btnClickAdd : this.btnClickReview },
+        { className: this.props.class, onClick: this.props.click ? this.props.click : this.props.btnpath === "add" ? this.btnClickAdd : this.btnClickReview },
         React.createElement(
           "p",
           null,
