@@ -166,7 +166,7 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     const dbFileName = "Users.db";
     // makes the object that represents the database in our code
     const db = new sqlite3.Database(dbFileName);  // object, not database.
-    const checkUser = 'SELECT * FROM Users WHERE googleID = '+ profile.id;
+    const checkUser = 'INSERT into Users (googleID,firstName,lastName) VALUES (@0, @1, @2)';
     db.run(checkUser, function userCheckCallback(err){
         if(err){
             console.log("Entry exists");
@@ -178,8 +178,8 @@ function gotProfile(accessToken, refreshToken, profile, done) {
         } 
         else {
             console.log("IM HEREEEEEEEEEEEEEEEEEE");
-            const cmdStr = 'INSERT into Users (googleID,firstName,lastName) VALUES (@0, @1, @2)';
-            db.run(cmdStr, dbRowID, userFirstName, userLastName, insertCallback);
+            // const cmdStr = 
+            // db.run(cmdStr, dbRowID, userFirstName, userLastName, insertCallback);
             done(null, dbRowID); 
         }   
 
