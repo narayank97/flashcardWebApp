@@ -168,13 +168,11 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     const db = new sqlite3.Database(dbFileName);  // object, not database.
     const checkUser = 'SELECT * FROM Users WHERE googleID = '+ profile.id;
     db.run(checkUser, function userCheckCallback(err){
-        if(err){
+        console.log(err);
+        if(null){
              console.log("Entry exists");
             console.log("Checked correctly");
             done(null, dbRowID); 
-            console.log("daniels");
-            
-            console.log("Check error -> ", err);
         } 
         else {
             console.log("IM HEREEEEEEEEEEEEEEEEEE");
