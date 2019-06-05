@@ -202,7 +202,7 @@ passport.serializeUser((dbRowID, done) => {
 // Whatever we pass in the "done" callback becomes req.user
 // and can be used by subsequent middleware.
 passport.deserializeUser((dbRowID, done) => {
-    console.log("deserializeUser. Input is:", dbRowID);
+    // console.log("deserializeUser. Input is:", dbRowID);
     const sqlite3 = require("sqlite3").verbose();  // use sqlite
     const fs = require("fs"); // file system
     const dbFileName = "Flashcards.db";
@@ -216,7 +216,7 @@ passport.deserializeUser((dbRowID, done) => {
         }
         if (row) {
             let userData = {userData: row};
-            console.log(userData);
+            console.log("YEET "+userData);
             done(null, userData);
         
         } 
