@@ -169,10 +169,9 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     const checkUser = 'SELECT * FROM Users WHERE googleID = '+ profile.id;
     db.run(checkUser, function userCheckCallback(err){
         if(err){
-          
             const cmdStr = 'INSERT into Users (googleID,firstName,lastName) VALUES (@0, @1, @2)';
-            
-            done(null, db.run(cmdStr, dbRowID, userFirstName, userLastName, insertCallback)); 
+            db.run(cmdStr, dbRowID, userFirstName, userLastName, insertCallback);
+            done(null, dbRowID); 
             console.log("Check error -> ", err);
         } 
         else {
