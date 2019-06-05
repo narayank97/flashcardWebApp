@@ -167,21 +167,34 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     // makes the object that represents the database in our code
     const db = new sqlite3.Database(dbFileName);  // object, not database.
     const checkUser = 'SELECT * FROM Users WHERE googleID = '+ profile.id;
-    db.run(checkUser, function userCheckCallback(err){
-        console.log(err);
-        if(err == null){
-             console.log("Entry exists");
-            console.log("Checked correctly");
+    // db.run(checkUser, function userCheckCallback(err){
+    //     console.log(err);
+    //     if(err == null){
+    //          console.log("Entry exists");
+    //         console.log("Checked correctly");
+    //         done(null, dbRowID); 
+    //     } 
+    //     else {
+    //         console.log("IM HEREEEEEEEEEEEEEEEEEE");
+    //         const cmdStr = 'INSERT into Users (googleID,firstName,lastName) VALUES (@0, @1, @2)';
+    //         db.run(cmdStr, dbRowID, userFirstName, userLastName, insertCallback);
+    //         done(null, dbRowID); 
+    //     }   
+
+    // });
+    
+    db.get( 'SELECT * FROM Users WHERE googleID = '+ profile.id,
+    function dataCallback(err, rowData) {
+        if (err) { 
+            console.log("error: ",err); 
             done(null, dbRowID); 
-        } 
-        else {
-            console.log("IM HEREEEEEEEEEEEEEEEEEE");
+        }
+        else { 
             const cmdStr = 'INSERT into Users (googleID,firstName,lastName) VALUES (@0, @1, @2)';
             db.run(cmdStr, dbRowID, userFirstName, userLastName, insertCallback);
             done(null, dbRowID); 
-        }   
-
-    }); 
+        }
+    });
 
     
     // key for db Row for this user in DB table.
