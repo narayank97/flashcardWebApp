@@ -171,8 +171,8 @@ function gotProfile(accessToken, refreshToken, profile, done) {
         if(err){
           
             const cmdStr = 'INSERT into Users (googleID,firstName,lastName) VALUES (@0, @1, @2)';
-            db.run(cmdStr, dbRowID, userFirstName, userLastName, insertCallback);
-            done(null, dbRowID); 
+            
+            done(null, db.run(cmdStr, dbRowID, userFirstName, userLastName, insertCallback)); 
             console.log("Check error -> ", err);
         } 
         else {
