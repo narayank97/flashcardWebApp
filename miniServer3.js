@@ -37,7 +37,6 @@ function startReviewHandler(req, res, next) {
     console.log("In Handler");
     console.log(userArr);
     res.json(userArr);
-    next();
 }
 
 
@@ -122,6 +121,7 @@ app.get('/query', function (req, res) { res.send('HTTP query!') });
 
 app.get('/query', queryHandler);   // if not, is it a valid query?
 app.get('/startreview', startReviewHandler);
+app.get('/start_review/startreview', startReviewHandler);
 app.get('/translate', translateHandler);   // if not, is it a valid translate query?
 app.get('/store', storeHandler);   // if not, is it a valid store query?
 
