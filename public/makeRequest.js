@@ -12,9 +12,11 @@ function createCORSRequest(method, url) {
 export function renderStartReview() {
   // if (event.keyCode == 13) {
     console.log("DEBUG");
-    let url = "start_review";
+    let url = "startreview";
+    console.log(url);
     let xhr = createCORSRequest("GET", url);
-
+    console.log(xhr);
+    console.log("NEW DEBUG");
     // checking if browser does CORS
     if (!xhr) {
       alert("CORS not supported");

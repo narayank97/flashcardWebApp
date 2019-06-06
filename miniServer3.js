@@ -29,6 +29,15 @@ const googleLoginData = {
 // It will get used much later in the pipeline. 
 passport.use( new GoogleStrategy(googleLoginData, gotProfile) );
 
+function startReviewHandler(req, res, next) {
+    console.log("In Handler");
+    let url = req.url;
+    // let qObj = req.query;
+    console.log("In Handler");
+    console.log(userArr);
+    res.json(userArr);
+}
+
 
 // Let's build a server pipeline!
 
@@ -96,11 +105,14 @@ app.get('/user/*',
 	express.static('.') 
        ); 
 
-app.get('/start_review', startReviewHandler);
+
 // next, all queries (like translate or store or get...
 app.get('/query', function (req, res) { res.send('HTTP query!') });
 
+
+
 app.get('/query', queryHandler);   // if not, is it a valid query?
+app.get('/startreview', startReviewHandler);
 app.get('/translate', translateHandler);   // if not, is it a valid translate query?
 app.get('/store', storeHandler);   // if not, is it a valid store query?
 
@@ -275,13 +287,6 @@ function queryHandler(req, res, next) {
     }
 }
 
-function startReviewHandler(req, res, next) {
-    let url = req.url;
-    let qObj = req.query;
-    console.log("In Handler");
-    console.log(userArr);
-    res.json(userArr);
-}
 
 
 function translateHandler(req, res, next) {
