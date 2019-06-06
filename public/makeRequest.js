@@ -10,22 +10,28 @@ function createCORSRequest(method, url) {
 
 // TESTING
 export function renderStartReview() {
-  let url = "start_review";
-  let xhr = createCORSRequest("GET", url);
-  // checking if browser does CORS
-  if (!xhr) {
-    alert("CORS not supported");
-    return;
-  }
+  // if (event.keyCode == 13) {
+    console.log("DEBUG");
+    let url = "start_review";
+    let xhr = createCORSRequest("GET", url);
+
+    // checking if browser does CORS
+    if (!xhr) {
+      alert("CORS not supported");
+      return;
+    }
+  // }
 }
 
 export function renderAdd() {
-  let url = "add";
-  let xhr = createCORSRequest("GET", url);
-  // checking if browser does CORS
-  if (!xhr) {
-    alert("CORS not supported");
-    return;
+  if (event.keyCode == 13) {
+    let url = "add";
+    let xhr = createCORSRequest("GET", url);
+    // checking if browser does CORS
+    if (!xhr) {
+      alert("CORS not supported");
+      return;
+    }
   }
 }
 
@@ -55,7 +61,7 @@ export function makeCorsRequest() {
 
     xhr.onerror = function() {
       alert("Woops, there was an error making the request.");
-    }; 
+    };
 
     // Actually send request to server
     xhr.send();
@@ -96,4 +102,3 @@ export function makeCorsRequestStore() {
   // Actually send request to server
   xhr.send();
 }
-
