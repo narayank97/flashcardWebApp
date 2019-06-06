@@ -400,6 +400,7 @@ var StartReview = function (_React$Component12) {
     var _this12 = _possibleConstructorReturn(this, (StartReview.__proto__ || Object.getPrototypeOf(StartReview)).call(this, props));
 
     _this12.IncrementItem = function () {
+      console.log(_this12.state.clicks);
       cards[_this12.state.clicks].seen++;
       _this12.setState({ clicks: _this12.state.clicks + 1 });
       if (_this12.state.clicks >= cards.length - 1) {
@@ -412,11 +413,11 @@ var StartReview = function (_React$Component12) {
     _this12.cur_card_text = "";
     _this12.cards = [];
     _this12.state = {
-      clicks: 0,
-      show: true,
       error: null,
       isLoaded: false,
-      items: []
+      items: [],
+      clicks: 0,
+      show: true
     };
     return _this12;
   }
@@ -438,7 +439,8 @@ var StartReview = function (_React$Component12) {
       }).then(function (result) {
         _this13.setState({
           isLoaded: true,
-          items: result
+          items: result,
+          clicks: 0
         });
       },
       // Note: it's important to handle errors here
@@ -447,29 +449,34 @@ var StartReview = function (_React$Component12) {
       function (error) {
         _this13.setState({
           isLoaded: true,
-          error: error
+          error: error,
+          clicks: 0
         });
       });
       // this.cards = renderStartReview();
-      cards = [{
-        googleID: "2",
-        english: "hello",
-        spanish: "Hola",
-        seen: 0,
-        correct: 0
-      }, {
-        googleID: "2",
-        english: "bye",
-        spanish: "Adios",
-        seen: 0,
-        correct: 0
-      }, {
-        googleID: "2",
-        english: "yes",
-        spanish: "Si",
-        seen: 0,
-        correct: 0
-      }];
+      // cards = [
+      //   {
+      //     googleID: "2",
+      //     english: "hello",
+      //     spanish: "Hola",
+      //     seen: 0,
+      //     correct: 0
+      //   },
+      //   {
+      //     googleID: "2",
+      //     english: "bye",
+      //     spanish: "Adios",
+      //     seen: 0,
+      //     correct: 0
+      //   },
+      //   {
+      //     googleID: "2",
+      //     english: "yes",
+      //     spanish: "Si",
+      //     seen: 0,
+      //     correct: 0
+      //   }
+      // ];
 
       console.log("Whats in here", this.cards);
 

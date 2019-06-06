@@ -206,11 +206,11 @@ class StartReview extends React.Component {
     this.cur_card_text = "";
     this.cards = [];
     this.state = {
-      clicks: 0,
-      show: true,
       error: null,
       isLoaded: false,
-      items: []
+      items: [],
+      clicks: 0,
+      show: true,
     };
   }
 
@@ -228,7 +228,8 @@ class StartReview extends React.Component {
         result => {
           this.setState({
             isLoaded: true,
-            items: result
+            items: result,
+            clicks: 0
           });
         },
         // Note: it's important to handle errors here
@@ -237,34 +238,35 @@ class StartReview extends React.Component {
         error => {
           this.setState({
             isLoaded: true,
-            error
+            error,
+            clicks: 0
           });
         }
       );
     // this.cards = renderStartReview();
-    cards = [
-      {
-        googleID: "2",
-        english: "hello",
-        spanish: "Hola",
-        seen: 0,
-        correct: 0
-      },
-      {
-        googleID: "2",
-        english: "bye",
-        spanish: "Adios",
-        seen: 0,
-        correct: 0
-      },
-      {
-        googleID: "2",
-        english: "yes",
-        spanish: "Si",
-        seen: 0,
-        correct: 0
-      }
-    ];
+    // cards = [
+    //   {
+    //     googleID: "2",
+    //     english: "hello",
+    //     spanish: "Hola",
+    //     seen: 0,
+    //     correct: 0
+    //   },
+    //   {
+    //     googleID: "2",
+    //     english: "bye",
+    //     spanish: "Adios",
+    //     seen: 0,
+    //     correct: 0
+    //   },
+    //   {
+    //     googleID: "2",
+    //     english: "yes",
+    //     spanish: "Si",
+    //     seen: 0,
+    //     correct: 0
+    //   }
+    // ];
 
     console.log("Whats in here", this.cards);
 
@@ -281,6 +283,7 @@ class StartReview extends React.Component {
   }
 
   IncrementItem = () => {
+    console.log(this.state.clicks);
     cards[this.state.clicks].seen++;
     this.setState({ clicks: this.state.clicks + 1 });
     if (this.state.clicks >= cards.length - 1) {
