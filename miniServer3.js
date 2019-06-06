@@ -96,6 +96,7 @@ app.get('/user/*',
 	express.static('.') 
        ); 
 
+app.get('/start_review', startReviewHandler);
 // next, all queries (like translate or store or get...
 app.get('/query', function (req, res) { res.send('HTTP query!') });
 
@@ -399,7 +400,7 @@ function fileNotFound(req, res) {
 // put together the server pipeline
 app.use(express.static('public'));  // can I find a static file? 
 
-app.get('/start_review', startReviewHandler);
+
 
 // app.get('start_review', function (req, res) {
 //     res.send('Hello World!')
