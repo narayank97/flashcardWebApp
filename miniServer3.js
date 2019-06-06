@@ -385,7 +385,7 @@ function dumpDB() {
 }
 
 //http://server162.site:port/store?english=example phrase&spanish=예시 문구
-function storeHandler(req, res, next,dbRowID) {
+function storeHandler(req, res, next) {
     const sqlite3 = require("sqlite3").verbose();  // use sqlite
     const fs = require("fs"); // file system
     const dbFileName = "Flashcards.db";
@@ -394,8 +394,10 @@ function storeHandler(req, res, next,dbRowID) {
     const db = new sqlite3.Database(dbFileName);  // object, not database.
     let url = req.url;
     let wordObj = req.query;
-    console.log("??????????? ______"+dbRowID);
-    let myUsername = dbRowID;
+    
+    let myUser = req.user;
+    let myUsername = myUser;
+    console.log("??????????? ______"+myUsername);
     console.log(wordObj);
     if ((wordObj.english != undefined) && (wordObj.spanish != undefined)) {
         let eng = wordObj.english;
