@@ -49,7 +49,7 @@ function getUserName(req, res, next) {
     res.json(userName);
 }
 
-function incSeen(req, res, next) {
+function incSeenServer(req, res, next) {
     console.log("Incremented SEEN");
     let url = req.url;
     let myID = req.id;
@@ -161,12 +161,15 @@ app.get('/query', function (req, res) { res.send('HTTP query!') });
 
 
 app.get('/query', queryHandler);   // if not, is it a valid query?
+app.get('/seen',incSeenServer);
 app.get('/startreview', startReviewHandler);
 app.get('/getusername', getUserName);
 app.get('/start_review/getusername', getUserName);
+app.get('/start_review/seen',incSeenServer);
 app.get('add/getusername', getUserName);
 app.get('/start_review/startreview', startReviewHandler);
 app.get('/add/translate', translateHandler);   // if not, is it a valid translate query?
+app.get('/add/seen',incSeenServer);
 app.get('/add/store', storeHandler);   // if not, is it a valid store query?
 app.get('/translate', translateHandler);   // if not, is it a valid translate query?
 app.get('/store', storeHandler);   // if not, is it a valid store query?

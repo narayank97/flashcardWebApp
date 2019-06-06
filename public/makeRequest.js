@@ -38,6 +38,30 @@ export function renderStartReview() {
   // }
 }
 
+export function seenIncrementClient(id) {
+  //let input = document.getElementById("myWord").value;
+  let url = "seen?id="+id;
+  let xhr = createCORSRequest("GET", url);
+
+  // checking if browser does CORS
+  if (!xhr) {
+    alert("CORS not supported");
+    return;
+  }
+
+  // Load some functions into response handlers.
+  xhr.onload = function() {
+    console.log("It was incremented");
+  };
+
+  xhr.onerror = function() {
+    alert("Woops, there was an error making the request.");
+  };
+
+  // Actually send request to server
+  xhr.send();
+}
+
 export function renderUserName() {
   // if (event.keyCode == 13) {
     console.log("DEBUG");
