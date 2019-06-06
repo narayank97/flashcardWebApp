@@ -395,7 +395,7 @@ function storeHandler(req, res, next) {
     let url = req.url;
     let wordObj = req.query;
     
-    let myUser = req.user;
+    let myUser = dbRowID;
     let myUsername = myUser;
     console.log("??????????? ______"+myUsername);
     console.log(wordObj);
