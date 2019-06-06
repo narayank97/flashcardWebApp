@@ -614,6 +614,9 @@ ReactDOM.render(React.createElement(
   React.createElement(Route, { path: "/login", component: LogIn }),
   React.createElement(Route, { path: "/start_review", component: StartReview }),
   React.createElement(Route, { path: "/add", component: AddPage }),
+  React.createElement(Route, { path: "/login/#", component: LogIn }),
+  React.createElement(Route, { path: "/start_review/#", component: StartReview }),
+  React.createElement(Route, { path: "/add/#", component: AddPage }),
   React.createElement(Route, { path: "*", component: StartReview })
 ), document.getElementById("root"));
 

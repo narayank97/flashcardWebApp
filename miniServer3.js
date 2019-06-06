@@ -81,6 +81,10 @@ app.use('/login', express.static('public'));
 app.use('/add', express.static('public'));
 app.use('/start_review', express.static('public'));
 
+app.use('/login/#', express.static('public'));
+app.use('/add/#', express.static('public'));
+app.use('/start_review/#', express.static('public'));
+
 // app.get('/add', express.static('public'));
 
 // next, handler for url that starts login with Google.
@@ -175,7 +179,7 @@ function isAuthenticated(req, res, next) {
 	console.log("Req.user:",req.user);
 	next();
     } else {
-	res.redirect('/login.html');  // send response telling
+	res.redirect('/login');  // send response telling
 	// Browser to go to login page
     }
 }
