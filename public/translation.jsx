@@ -171,7 +171,7 @@ class CardBack extends React.Component {
 class Card extends React.Component {
   constructor(props) {
     super(props);
-    // this.cards = [];
+    this.correct = false;
     this.state = {
       flipped: false, 
     };
@@ -181,11 +181,10 @@ class Card extends React.Component {
 
   flip = () => {
     if (userInput === cards[index].english) {
-      this.setState({ flipped: !this.state.flipped });
+      this.correct = true
     }
-    else {
-      console.log("wrong");
-    }
+    this.setState({ flipped: !this.state.flipped });
+
   };
   render() {
     // this.componentDidMount();
@@ -196,7 +195,7 @@ class Card extends React.Component {
       >
         {/* <div className="card-container"> */}
         <div className="card-body">
-          <CardBack text="Correct!" />
+          <CardBack text={(this.correct === false) ? this.props.text : this.props.text} />
 
           <CardFront text={this.props.text} />
         </div>
@@ -218,7 +217,7 @@ class StartReview extends React.Component {
 
   componentDidMount() {
     //  window.addEventListener('load', renderStartReview);
-    let cards = renderStartReview();
+    cards = renderStartReview();
     // this.cards
     /*
     cards = [
@@ -244,7 +243,7 @@ class StartReview extends React.Component {
         correct: 0
       }
     ];*/
-    console.log(cards[0].spanish);
+    // console.log(cards[0].spanish);
     this.cur_card_text = cards[this.state.clicks].spanish;
     console.log(typeof this.cur_card_text);
     console.log(this.cur_card_text);

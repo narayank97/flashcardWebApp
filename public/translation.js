@@ -347,17 +347,16 @@ var Card = function (_React$Component11) {
   function Card(props) {
     _classCallCheck(this, Card);
 
-    // this.cards = [];
     var _this11 = _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).call(this, props));
 
     _this11.flip = function () {
       if (userInput === cards[index].english) {
-        _this11.setState({ flipped: !_this11.state.flipped });
-      } else {
-        console.log("wrong");
+        _this11.correct = true;
       }
+      _this11.setState({ flipped: !_this11.state.flipped });
     };
 
+    _this11.correct = false;
     _this11.state = {
       flipped: false
     };
@@ -378,7 +377,7 @@ var Card = function (_React$Component11) {
         React.createElement(
           "div",
           { className: "card-body" },
-          React.createElement(CardBack, { text: "Correct!" }),
+          React.createElement(CardBack, { text: this.correct === false ? this.props.text : this.props.text }),
           React.createElement(CardFront, { text: this.props.text })
         )
       );
@@ -418,7 +417,7 @@ var StartReview = function (_React$Component12) {
     key: "componentDidMount",
     value: function componentDidMount() {
       //  window.addEventListener('load', renderStartReview);
-      var cards = renderStartReview();
+      cards = renderStartReview();
       // this.cards
       /*
       cards = [
@@ -444,7 +443,7 @@ var StartReview = function (_React$Component12) {
           correct: 0
         }
       ];*/
-      console.log(cards[0].spanish);
+      // console.log(cards[0].spanish);
       this.cur_card_text = cards[this.state.clicks].spanish;
       console.log(_typeof(this.cur_card_text));
       console.log(this.cur_card_text);
