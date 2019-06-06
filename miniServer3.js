@@ -49,6 +49,28 @@ function getUserName(req, res, next) {
     res.json(userName);
 }
 
+function incSeen(req, res, next) {
+    console.log("Incremented SEEN");
+    let url = req.url;
+    let myID = req.id;
+
+    if(myID != undefined) // got db stuff
+    {
+        const sqlite3 = require("sqlite3").verbose();  // use sqlite
+        const fs = require("fs"); // file system
+        const dbFileName = "Flashcards.db";
+        const cmdStr = 'Update MyTable Set seen = seen + 1 Where id = '+myID;
+        const db = new sqlite3.Database(dbFileName);  // object, not database.
+        db.run(cmdStr);
+        console.log("WE INCREMENTED THIS");
+    }
+
+
+    // let qObj = req.query;
+    
+    res.json("Seen incremented");
+}
+
 
 // Let's build a server pipeline!
 
