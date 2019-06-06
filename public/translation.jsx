@@ -310,7 +310,7 @@ class StartReview extends React.Component {
       return <div>Loading...</div>;
     } else {
       // console.log("We are here");
-      // console.log(items);
+      console.log(items);
       cards = items;
       // return (
 

@@ -526,7 +526,7 @@ var StartReview = function (_React$Component12) {
         );
       } else {
         // console.log("We are here");
-        // console.log(items);
+        console.log(items);
         cards = items;
         // return (
 
