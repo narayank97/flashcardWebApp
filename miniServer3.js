@@ -305,7 +305,7 @@ passport.deserializeUser((dbRowID, done) => {
     const db = new sqlite3.Database(dbFileName);  // object, not database.
     const checkFlashcards = 'SELECT * FROM Flashcards WHERE googleID = ' + dbRowID;
     console.log("!!!!!!!!!!!!!!!!!!!!!!--" + dbRowID);
-
+    userArr = [];
     db.get(checkFlashcards, (err, row) => {
         if (err) {
             return console.error(err.message);
