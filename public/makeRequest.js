@@ -23,7 +23,7 @@ export function renderStartReview() {
       return;
     }
   // Actually send request to server
-  xhr.send();
+    xhr.send();
   // }
 }
 
