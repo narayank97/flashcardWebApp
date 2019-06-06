@@ -29,7 +29,7 @@ const googleLoginData = {
 // The gotProfile callback is for the server's HTTPS request
 // to Google for the user's profile information.
 // It will get used much later in the pipeline. 
-passport.use( new GoogleStrategy(googleLoginData, gotProfile) );
+passport.use(new GoogleStrategy(googleLoginData, gotProfile));
 
 function startReviewHandler(req, res, next) {
     console.log("In Handler");
@@ -49,6 +49,28 @@ function getUserName(req, res, next) {
     res.json(userName);
 }
 
+function incSeen(req, res, next) {
+    console.log("Incremented SEEN");
+    let url = req.url;
+    let myID = req.id;
+
+    if (myID != undefined) // got db stuff
+    {
+        const sqlite3 = require("sqlite3").verbose();  // use sqlite
+        const fs = require("fs"); // file system
+        const dbFileName = "Flashcards.db";
+        const cmdStr = 'Update MyTable Set seen = seen + 1 Where id = ' + myID;
+        const db = new sqlite3.Database(dbFileName);  // object, not database.
+        db.run(cmdStr);
+        console.log("WE INCREMENTED THIS");
+    }
+
+
+    // let qObj = req.query;
+
+    res.json("Seen incremented");
+}
+
 
 // Let's build a server pipeline!
 
@@ -64,17 +86,17 @@ app.use('/', printURL);
 app.use(cookieSession({
     maxAge: 6 * 60 * 60 * 1000, // Six hours in milliseconds
     // meaningless random string used by encryption
-    keys: ['hanger waldo mercy dance']  
+    keys: ['hanger waldo mercy dance']
 }));
 
 // Initializes request object for further handling by passport
-app.use(passport.initialize()); 
+app.use(passport.initialize());
 
 // If there is a valid cookie, will call deserializeUser()
-app.use(passport.session()); 
+app.use(passport.session());
 
 // Public static files
-app.get('/*',express.static('public'));
+app.get('/*', express.static('public'));
 
 // Public static files
 app.use('/login', express.static('public'));
@@ -93,7 +115,7 @@ app.use('/start_review/#', express.static('public'));
 // Google. The object { scope: ['profile'] } says to ask Google
 // for their user profile information.
 app.get('/auth/google',
-	passport.authenticate('google',{ scope: ['profile'] }) );
+    passport.authenticate('google', { scope: ['profile'] }));
 // passport.authenticate sends off the 302 response
 // with fancy redirect URL containing request for profile, and
 // client ID string to identify this app. 
@@ -101,38 +123,37 @@ app.get('/auth/google',
 // Google redirects here after user successfully logs in
 // This route has three handler functions, one run after the other. 
 app.get('/auth/redirect',
-	// for educational purposes
-	function (req, res, next) {
-	    console.log("at auth/redirect");
-	    next();
-	},
-	// This will issue Server's own HTTPS request to Google
-	// to access the user's profile information with the 
-	// temporary key we got in the request. 
-	passport.authenticate('google'),
-	// then it will run the "gotProfile" callback function,
-	// set up the cookie, call serialize, whose "done" 
-	// will come back here to send back the response
-	// ...with a cookie in it for the Browser! 
-	function (req, res) {
+    // for educational purposes
+    function (req, res, next) {
+        console.log("at auth/redirect");
+        next();
+    },
+    // This will issue Server's own HTTPS request to Google
+    // to access the user's profile information with the 
+    // temporary key we got in the request. 
+    passport.authenticate('google'),
+    // then it will run the "gotProfile" callback function,
+    // set up the cookie, call serialize, whose "done" 
+    // will come back here to send back the response
+    // ...with a cookie in it for the Browser! 
+    function (req, res) {
         console.log('Logged in and using cookies!')
-        if(oldUser == false){
+        if (oldUser == false) {
             res.redirect('/add');
         }
-        else
-        {
+        else {
             res.redirect('/start_review');
         }
-	    
-	});
+
+    });
 
 // static files in /user are only available after login
 app.get('/user/*',
-	isAuthenticated, // only pass on to following function if
-	// user is logged in 
-	// serving files that start with /user from here gets them from ./
-	express.static('.') 
-       ); 
+    isAuthenticated, // only pass on to following function if
+    // user is logged in 
+    // serving files that start with /user from here gets them from ./
+    express.static('.')
+);
 
 
 // next, all queries (like translate or store or get...
@@ -157,16 +178,16 @@ app.get('/store', storeHandler);   // if not, is it a valid store query?
 // })
 
 // finally, not found...applies to everything
-app.use( fileNotFound );
+app.use(fileNotFound);
 
 // Pipeline is ready. Start listening!  
-app.listen(55106, function (){console.log('Listening...');} );
+app.listen(55106, function () { console.log('Listening...'); });
 
 
 // middleware functions
 
 // print the url of incoming HTTP request
-function printURL (req, res, next) {
+function printURL(req, res, next) {
     console.log(req.url);
     next();
 }
@@ -175,12 +196,12 @@ function printURL (req, res, next) {
 // personal data
 function isAuthenticated(req, res, next) {
     if (req.user) {
-	console.log("Req.session:",req.session);
-	console.log("Req.user:",req.user);
-	next();
+        console.log("Req.session:", req.session);
+        console.log("Req.user:", req.user);
+        next();
     } else {
-	res.redirect('/login');  // send response telling
-	// Browser to go to login page
+        res.redirect('/login');  // send response telling
+        // Browser to go to login page
     }
 }
 
@@ -190,8 +211,8 @@ function fileNotFound(req, res) {
     let url = req.url;
     res.type('text/plain');
     res.status(404);
-    res.send('Cannot find '+url);
-    }
+    res.send('Cannot find ' + url);
+}
 
 // Some functions Passport calls, that we can use to specialize.
 // This is where we get to write our own code, not just boilerplate. 
@@ -202,7 +223,7 @@ function fileNotFound(req, res) {
 // is called (in /auth/redirect/),
 // once we actually have the profile data from Google. 
 function gotProfile(accessToken, refreshToken, profile, done) {
-    console.log("Google profile",profile);
+    console.log("Google profile", profile);
     // here is a good place to check if user is in DB,
     // and to store him in DB if not already there. 
     // Second arg to "done" will be passed into serializeUser,
@@ -211,18 +232,18 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     let dbRowID = profile.id;  // temporary! Should be the real unique
     let userFirstName = profile.name.givenName;
     let userLastName = profile.name.familyName;
-    userName = userFirstName+" "+userLastName;
+    userName = userFirstName + " " + userLastName;
     console.log("HELLOOOOOO");
     console.log(dbRowID);
     console.log(userFirstName);
     console.log(userLastName);
-    
+
     const sqlite3 = require("sqlite3").verbose();  // use sqlite
     const fs = require("fs"); // file system
     const dbFileName = "Users.db";
     // makes the object that represents the database in our code
     const db = new sqlite3.Database(dbFileName);  // object, not database.
-    const checkUser = 'SELECT * FROM Users WHERE googleID = '+ profile.id;
+    const checkUser = 'SELECT * FROM Users WHERE googleID = ' + profile.id;
     // db.run(checkUser, function userCheckCallback(err){
     //     console.log(err);
     //     if(err == null){
@@ -238,36 +259,36 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     //     }   
 
     // });
-    
-    db.get( 'SELECT * FROM Users WHERE googleID = '+ profile.id,
-    function dataCallback(err, rowData) {
-        if (err) {
-            oldUser = false; 
-            console.log("error: ",err); 
-            done(null, dbRowID); 
-        }
-        else { 
-            const cmdStr = 'INSERT into Users (googleID,firstName,lastName) VALUES (@0, @1, @2)';
-            db.run(cmdStr, dbRowID, userFirstName, userLastName, insertCallback);
-            oldUser = true;
-            done(null, dbRowID); 
-        }
-    });
 
-    
+    db.get('SELECT * FROM Users WHERE googleID = ' + profile.id,
+        function dataCallback(err, rowData) {
+            if (err) {
+                oldUser = false;
+                console.log("error: ", err);
+                done(null, dbRowID);
+            }
+            else {
+                const cmdStr = 'INSERT into Users (googleID,firstName,lastName) VALUES (@0, @1, @2)';
+                db.run(cmdStr, dbRowID, userFirstName, userLastName, insertCallback);
+                oldUser = true;
+                done(null, dbRowID);
+            }
+        });
+
+
     // key for db Row for this user in DB table.
     // Note: cannot be zero, has to be something that evaluates to
     // True.  
 
-    
+
 }
 
 // Part of Server's sesssion set-up.  
 // The second operand of "done" becomes the input to deserializeUser
 // on every subsequent HTTP request with this session's cookie. 
 passport.serializeUser((dbRowID, done) => {
-    
-    console.log("SerializeUser. Input is",dbRowID);
+
+    console.log("SerializeUser. Input is", dbRowID);
     done(null, dbRowID);
 });
 
@@ -283,8 +304,8 @@ passport.deserializeUser((dbRowID, done) => {
     const dbFileName = "Flashcards.db";
     // makes the object that represents the database in our code
     const db = new sqlite3.Database(dbFileName);  // object, not database.
-    const checkFlashcards = 'SELECT * FROM Flashcards WHERE googleID = '+ dbRowID;
-    console.log("!!!!!!!!!!!!!!!!!!!!!!--"+dbRowID);
+    const checkFlashcards = 'SELECT * FROM Flashcards WHERE googleID = ' + dbRowID;
+    console.log("!!!!!!!!!!!!!!!!!!!!!!--" + dbRowID);
 
     db.get(checkFlashcards, (err, row) => {
         if (err) {
@@ -292,20 +313,20 @@ passport.deserializeUser((dbRowID, done) => {
         }
         if (row) {
             console.log("HELLLOOOOO");
-            let userData = {userData: row};
+            let userData = { userData: row };
             userArr.push(row)
             // userArr.push(JSON.stringify(row))
             // console.log("YEET "+userData);
             console.log("NO JSON " + row);
-            console.log("WITH JSON "+JSON.stringify(row));
+            console.log("WITH JSON " + JSON.stringify(row));
             done(null, dbRowID);
-        
-        } 
+
+        }
         else {
-            let userData = {userData: "data from db row goes here"};
+            let userData = { userData: "data from db row goes here" };
             done(null, dbRowID);
-        // insert the user since you can't find it in the db
-        // You need to call done() here
+            // insert the user since you can't find it in the db
+            // You need to call done() here
         }
     });
 
@@ -397,10 +418,10 @@ function translateHandler(req, res, next) {
 }
 
 function insertCallback(err) {
-    if (err) { 
-        console.log(err); 
+    if (err) {
+        console.log(err);
     }
-} 
+}
 
 function dumpDB() {
     const sqlite3 = require("sqlite3").verbose();  // use sqlite
@@ -408,8 +429,8 @@ function dumpDB() {
     const dbFileName = "Flashcards.db";
     // makes the object that represents the database in our code
     const db = new sqlite3.Database(dbFileName);  // object, not database.
-    db.all ( 'SELECT * FROM flashcards', dataCallback);
-    function dataCallback( err, data ) {console.log(data)}
+    db.all('SELECT * FROM flashcards', dataCallback);
+    function dataCallback(err, data) { console.log(data) }
 }
 
 //http://server162.site:port/store?english=example phrase&spanish=예시 문구
@@ -422,19 +443,19 @@ function storeHandler(req, res, next) {
     const db = new sqlite3.Database(dbFileName);  // object, not database.
     let url = req.url;
     let wordObj = req.query;
-    
+
     let myUser = req.user;
     let myUsername = myUser;
-    console.log("??????????? ______"+myUsername);
+    console.log("??????????? ______" + myUsername);
     console.log(wordObj);
     if ((wordObj.english != undefined) && (wordObj.spanish != undefined)) {
         let eng = wordObj.english;
         let span = wordObj.spanish;
         console.log("HI IM IN STORE HANDLER2222222");
         const cmdStr = 'INSERT into Flashcards (googleID, english,spanish, seen, correct) VALUES (@0, @1, @2, 0, 0)';
-        db.run(cmdStr,myUsername,eng, span, insertCallback);
+        db.run(cmdStr, myUsername, eng, span, insertCallback);
         console.log("We're in boyz");
-        dumpDB(); 
+        dumpDB();
         res.json("We put it in the database ");
     }
     else {

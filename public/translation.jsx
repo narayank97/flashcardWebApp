@@ -90,10 +90,10 @@ class Footer extends React.Component {
 class Google extends React.Component {
   render() {
     return (
-        <a href={'/auth/google'} className="google">
-          <img src="./assets/google.jpg" />
-          <p>Log in with Google</p>
-        </a>
+      <a href={"/auth/google"} className="google">
+        <img src="./assets/google.jpg" />
+        <p>Log in with Google</p>
+      </a>
     );
   }
 }
@@ -136,12 +136,9 @@ class CardFront extends React.Component {
     return (
       <div className="card-side side-front">
         <div className="card-side-container">
-          {/* <h2 id="trans">{this.props.text}</h2> */}
           <div className="refresh">
             <img src="./assets/noun_Refresh_2310283.svg" />
           </div>
-          {/* <Correct /> */}
-          {/* <CardInput name="in" id="1" placeholder="place" /> */}
           <p>{this.props.text}</p>
         </div>
       </div>
@@ -152,6 +149,7 @@ class CardFront extends React.Component {
 // React component for the back side of the card
 class CardBack extends React.Component {
   render(props) {
+    console.log("Here", this.props.correct);
     return (
       <div className="card-side side-back">
         <div className="card-side-container">
@@ -159,8 +157,7 @@ class CardBack extends React.Component {
           <div className="refresh">
             <img src="./assets/noun_Refresh_2310283.svg" />
           </div>
-          <Correct />
-          {/* <CardInput name="in" id="1" placeholder="place" /> */}
+          {this.props.correct ? <Correct /> : <p>{this.props.text}</p>}
         </div>
       </div>
     );
@@ -173,18 +170,17 @@ class Card extends React.Component {
     super(props);
     this.correct = false;
     this.state = {
-      flipped: false, 
+      flipped: false
     };
     this.flip = this.flip.bind(this);
   }
 
-
   flip = () => {
     if (userInput === cards[index].english) {
-      this.correct = true
+      this.correct = true;
     }
+    console.log(this.correct);
     this.setState({ flipped: !this.state.flipped });
-
   };
   render() {
     // this.componentDidMount();
@@ -195,7 +191,7 @@ class Card extends React.Component {
       >
         {/* <div className="card-container"> */}
         <div className="card-body">
-          <CardBack text={(this.correct === false) ? this.props.text : this.props.text} />
+          <CardBack text={this.props.text} correct={this.correct} />
 
           <CardFront text={this.props.text} />
         </div>
@@ -211,15 +207,41 @@ class StartReview extends React.Component {
     this.cards = [];
     this.state = {
       clicks: 0,
-      show: true
+      show: true,
+      error: null,
+      isLoaded: false,
+      items: []
     };
   }
 
   componentDidMount() {
     //  window.addEventListener('load', renderStartReview);
-    cards = renderStartReview();
+    // this.cards = renderStartReview();
     // this.cards
-    /*
+    // fetch('/startreview')
+    //   .then(response => response.json())
+    //   .then(data => this.setState({ hits: data.hits }));
+
+    fetch("/startreview")
+      .then(res => res.json())
+      .then(
+        result => {
+          this.setState({
+            isLoaded: true,
+            items: result
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        error => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      );
+    // this.cards = renderStartReview();
     cards = [
       {
         googleID: "2",
@@ -242,8 +264,10 @@ class StartReview extends React.Component {
         seen: 0,
         correct: 0
       }
-    ];*/
-    
+    ];
+
+    console.log("Whats in here", this.cards);
+
     // console.log(cards[0].spanish);
     // this.cur_card_text = cards[this.state.clicks].spanish;
     // console.log(typeof this.cur_card_text);
@@ -266,46 +290,64 @@ class StartReview extends React.Component {
   };
 
   onFocus() {
-    // console.log(this.myInput.value);
     userInput = this.myInput.value;
   }
 
   onBlur() {
-    // console.log(this.myInput.value);
     userInput = this.myInput.value;
   }
 
   render() {
     this.componentDidMount();
-    return (
-      <div className="col">
-        <Title btntext="Add" btnpath="add" />
-        <div className="column-container">
-          {/* <div className="big-card" onClick={this.toggle.bind(this)}> */}
-          {/* <Card text="test" /> */}
-          <Card text={cards[index].spanish} />
-          <div className="small-card">
-            {/* <input id="input" /> */}
-            <input
-              ref={input => {
-                this.myInput = input;
-              }}
-              onFocus={this.onFocus.bind(this)}
-              onBlur={this.onBlur.bind(this)}
-            />
-            {/* <p>{this.props.input}</p> */}
+
+    // console.log("In Render", this.cards);
+    const { error, isLoaded, items } = this.state;
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      console.log("We are here");
+      console.log(items);
+      cards = items
+      // return (
+
+      //   <ul>
+      //     {items.map(item => (
+      //       <li key={item.name}>
+      //         {item.name} {item.price}
+      //       </li>
+      //     ))}
+      //   </ul>
+      // );
+
+      // cards = this.cards;
+      return (
+        <div className="col">
+          <Title btntext="Add" btnpath="add" />
+          <div className="column-container">
+            <Card text={cards[index].spanish} />
+            <div className="small-card">
+              <input
+                ref={input => {
+                  this.myInput = input;
+                }}
+                onFocus={this.onFocus.bind(this)}
+                onBlur={this.onBlur.bind(this)}
+              />
+            </div>
+            <div className="btn-container">
+              <Button
+                class="button-green "
+                text="Next"
+                click={this.IncrementItem}
+              />
+            </div>
           </div>
-          <div className="btn-container">
-            <Button
-              class="button-green "
-              text="Next"
-              click={this.IncrementItem}
-            />
-          </div>
+          <Footer username="Daniel" />
         </div>
-        <Footer username="Daniel" />
-      </div>
-    );
+      );
+    }
   }
 }
 
