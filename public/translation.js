@@ -6,7 +6,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import { makeCorsRequest, makeCorsRequestStore, renderStartReview } from "./makeRequest.js";
+import { makeCorsRequest, makeCorsRequestStore, renderStartReview, renderUserName } from "./makeRequest.js";
 
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
@@ -396,6 +396,9 @@ var StartReview = function (_React$Component12) {
     value: function componentDidMount() {
       //  window.addEventListener('load', renderStartReview);
       var cards = renderStartReview();
+      var username = renderUserName();
+      console.log(JSON.stringify(username));
+      console.log(username);
       console.log(JSON.stringify(cards));
       console.log("Hey");
     }

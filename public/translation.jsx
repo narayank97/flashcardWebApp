@@ -1,7 +1,8 @@
 import {
   makeCorsRequest,
   makeCorsRequestStore,
-  renderStartReview
+  renderStartReview,
+  renderUserName
 } from "./makeRequest.js";
 
 var Router = ReactRouter.Router;
@@ -209,6 +210,9 @@ class StartReview extends React.Component {
   componentDidMount() {
     //  window.addEventListener('load', renderStartReview);
     let cards = renderStartReview();
+    let username = renderUserName();
+    console.log(JSON.stringify(username));
+    console.log(username);
     console.log(JSON.stringify(cards));
     console.log("Hey");
   }
