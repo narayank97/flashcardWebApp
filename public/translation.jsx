@@ -11,6 +11,10 @@ var IndexRoute = ReactRouter.IndexRoute;
 var Link = ReactRouter.Link;
 var browserHistory = ReactRouter.browserHistory;
 
+let cards = [];
+let index = 0;
+let userInput = "";
+
 class Title extends React.Component {
   btnClick() {
     browserHistory.push(this.props.btnpath);
@@ -137,7 +141,8 @@ class CardFront extends React.Component {
             <img src="./assets/noun_Refresh_2310283.svg" />
           </div>
           {/* <Correct /> */}
-          <CardInput name="in" id="1" placeholder="place" />
+          {/* <CardInput name="in" id="1" placeholder="place" /> */}
+          <p>{this.props.text}</p>
         </div>
       </div>
     );
@@ -166,14 +171,24 @@ class CardBack extends React.Component {
 class Card extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { flipped: false };
+    // this.cards = [];
+    this.state = {
+      flipped: false, 
+    };
     this.flip = this.flip.bind(this);
   }
 
+
   flip = () => {
-    this.setState({ flipped: !this.state.flipped });
+    if (userInput === cards[index].english) {
+      this.setState({ flipped: !this.state.flipped });
+    }
+    else {
+      console.log("wrong");
+    }
   };
   render() {
+    // this.componentDidMount();
     return (
       <div
         onClick={this.flip}
@@ -183,7 +198,7 @@ class Card extends React.Component {
         <div className="card-body">
           <CardBack text="Correct!" />
 
-          <CardFront text="Volare" />
+          <CardFront text={this.props.text} />
         </div>
       </div>
     );
@@ -191,54 +206,98 @@ class Card extends React.Component {
 }
 
 class StartReview extends React.Component {
-  // constructor(props){
-  //   super(props);
-  //   this.state = {
-  //     data: 'Jordan Belfort'
-  //   }
-  // }
-
-  // componentDidMount() {
-  //   this. makeRequest(... , callBackFunction) //very important,because js is async
-
-  // }
   constructor(props) {
     super(props);
-    // this.handleLoad = this.handleLoad.bind(this);
+    this.cur_card_text = "";
+    this.cards = [];
+    this.state = {
+      clicks: 0,
+      show: true
+    };
   }
 
   componentDidMount() {
     //  window.addEventListener('load', renderStartReview);
-    let cards = renderStartReview();
-    let username = renderUserName();
-    console.log(JSON.stringify(username));
-    console.log(username);
-    console.log(JSON.stringify(cards));
-    console.log("Hey");
+    // let cards = renderStartReview();
+    // this.cards
+    cards = [
+      {
+        googleID: "2",
+        english: "hello",
+        spanish: "Hola",
+        seen: 0,
+        correct: 0
+      },
+      {
+        googleID: "2",
+        english: "bye",
+        spanish: "Adios",
+        seen: 0,
+        correct: 0
+      },
+      {
+        googleID: "2",
+        english: "yes",
+        spanish: "Si",
+        seen: 0,
+        correct: 0
+      }
+    ];
+    console.log(cards[0].spanish);
+    this.cur_card_text = cards[this.state.clicks].spanish;
+    console.log(typeof this.cur_card_text);
+    console.log(this.cur_card_text);
+    // let username = renderUserName();
+    // console.log(JSON.stringify(username));
+    // console.log(username);
+    // console.log(JSON.stringify(cards));
+    // console.log("Hey");
   }
 
-  // componentDidMount() {
-  //   fetch("/startreview")
-  //     .then(response => response.json())
-  //     .then(data => this.setState({ hits: data.hits }));
-  // }
+  IncrementItem = () => {
+    cards[this.state.clicks].seen++;
+    this.setState({ clicks: this.state.clicks + 1 });
+    if (this.state.clicks >= cards.length - 1) {
+      this.setState({ clicks: 0 });
+    }
+    index = this.state.clicks;
+  };
+
+  onFocus() {
+    // console.log(this.myInput.value);
+    userInput = this.myInput.value;
+  }
+
+  onBlur() {
+    // console.log(this.myInput.value);
+    userInput = this.myInput.value;
+  }
 
   render() {
+    this.componentDidMount();
     return (
       <div className="col">
         <Title btntext="Add" btnpath="add" />
         <div className="column-container">
           {/* <div className="big-card" onClick={this.toggle.bind(this)}> */}
-          <Card />
+          {/* <Card text="test" /> */}
+          <Card text={cards[index].spanish} />
           <div className="small-card">
-            <input id="" />
+            {/* <input id="input" /> */}
+            <input
+              ref={input => {
+                this.myInput = input;
+              }}
+              onFocus={this.onFocus.bind(this)}
+              onBlur={this.onBlur.bind(this)}
+            />
             {/* <p>{this.props.input}</p> */}
           </div>
           <div className="btn-container">
             <Button
               class="button-green "
               text="Next"
-              click={renderStartReview}
+              click={this.IncrementItem}
             />
           </div>
         </div>

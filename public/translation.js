@@ -1,3 +1,5 @@
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13,6 +15,10 @@ var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
 var Link = ReactRouter.Link;
 var browserHistory = ReactRouter.browserHistory;
+
+var cards = [];
+var index = 0;
+var userInput = "";
 
 var Title = function (_React$Component) {
   _inherits(Title, _React$Component);
@@ -284,7 +290,11 @@ var CardFront = function (_React$Component9) {
             { className: "refresh" },
             React.createElement("img", { src: "./assets/noun_Refresh_2310283.svg" })
           ),
-          React.createElement(CardInput, { name: "in", id: "1", placeholder: "place" })
+          React.createElement(
+            "p",
+            null,
+            this.props.text
+          )
         )
       );
     }
@@ -337,13 +347,20 @@ var Card = function (_React$Component11) {
   function Card(props) {
     _classCallCheck(this, Card);
 
+    // this.cards = [];
     var _this11 = _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).call(this, props));
 
     _this11.flip = function () {
-      _this11.setState({ flipped: !_this11.state.flipped });
+      if (userInput === cards[index].english) {
+        _this11.setState({ flipped: !_this11.state.flipped });
+      } else {
+        console.log("wrong");
+      }
     };
 
-    _this11.state = { flipped: false };
+    _this11.state = {
+      flipped: false
+    };
     _this11.flip = _this11.flip.bind(_this11);
     return _this11;
   }
@@ -351,6 +368,7 @@ var Card = function (_React$Component11) {
   _createClass(Card, [{
     key: "render",
     value: function render() {
+      // this.componentDidMount();
       return React.createElement(
         "div",
         {
@@ -361,7 +379,7 @@ var Card = function (_React$Component11) {
           "div",
           { className: "card-body" },
           React.createElement(CardBack, { text: "Correct!" }),
-          React.createElement(CardFront, { text: "Volare" })
+          React.createElement(CardFront, { text: this.props.text })
         )
       );
     }
@@ -373,45 +391,82 @@ var Card = function (_React$Component11) {
 var StartReview = function (_React$Component12) {
   _inherits(StartReview, _React$Component12);
 
-  // constructor(props){
-  //   super(props);
-  //   this.state = {
-  //     data: 'Jordan Belfort'
-  //   }
-  // }
-
-  // componentDidMount() {
-  //   this. makeRequest(... , callBackFunction) //very important,because js is async
-
-  // }
   function StartReview(props) {
     _classCallCheck(this, StartReview);
 
-    return _possibleConstructorReturn(this, (StartReview.__proto__ || Object.getPrototypeOf(StartReview)).call(this, props));
-    // this.handleLoad = this.handleLoad.bind(this);
+    var _this12 = _possibleConstructorReturn(this, (StartReview.__proto__ || Object.getPrototypeOf(StartReview)).call(this, props));
+
+    _this12.IncrementItem = function () {
+      cards[_this12.state.clicks].seen++;
+      _this12.setState({ clicks: _this12.state.clicks + 1 });
+      if (_this12.state.clicks >= cards.length - 1) {
+        _this12.setState({ clicks: 0 });
+      }
+      index = _this12.state.clicks;
+    };
+
+    _this12.cur_card_text = "";
+    _this12.cards = [];
+    _this12.state = {
+      clicks: 0,
+      show: true
+    };
+    return _this12;
   }
 
   _createClass(StartReview, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       //  window.addEventListener('load', renderStartReview);
-      var cards = renderStartReview();
-      var username = renderUserName();
-      console.log(JSON.stringify(username));
-      console.log(username);
-      console.log(JSON.stringify(cards));
-      console.log("Hey");
+      // let cards = renderStartReview();
+      // this.cards
+      cards = [{
+        googleID: "2",
+        english: "hello",
+        spanish: "Hola",
+        seen: 0,
+        correct: 0
+      }, {
+        googleID: "2",
+        english: "bye",
+        spanish: "Adios",
+        seen: 0,
+        correct: 0
+      }, {
+        googleID: "2",
+        english: "yes",
+        spanish: "Si",
+        seen: 0,
+        correct: 0
+      }];
+      console.log(cards[0].spanish);
+      this.cur_card_text = cards[this.state.clicks].spanish;
+      console.log(_typeof(this.cur_card_text));
+      console.log(this.cur_card_text);
+      // let username = renderUserName();
+      // console.log(JSON.stringify(username));
+      // console.log(username);
+      // console.log(JSON.stringify(cards));
+      // console.log("Hey");
     }
-
-    // componentDidMount() {
-    //   fetch("/startreview")
-    //     .then(response => response.json())
-    //     .then(data => this.setState({ hits: data.hits }));
-    // }
-
+  }, {
+    key: "onFocus",
+    value: function onFocus() {
+      // console.log(this.myInput.value);
+      userInput = this.myInput.value;
+    }
+  }, {
+    key: "onBlur",
+    value: function onBlur() {
+      // console.log(this.myInput.value);
+      userInput = this.myInput.value;
+    }
   }, {
     key: "render",
     value: function render() {
+      var _this13 = this;
+
+      this.componentDidMount();
       return React.createElement(
         "div",
         { className: "col" },
@@ -419,11 +474,17 @@ var StartReview = function (_React$Component12) {
         React.createElement(
           "div",
           { className: "column-container" },
-          React.createElement(Card, null),
+          React.createElement(Card, { text: cards[index].spanish }),
           React.createElement(
             "div",
             { className: "small-card" },
-            React.createElement("input", { id: "" })
+            React.createElement("input", {
+              ref: function ref(input) {
+                _this13.myInput = input;
+              },
+              onFocus: this.onFocus.bind(this),
+              onBlur: this.onBlur.bind(this)
+            })
           ),
           React.createElement(
             "div",
@@ -431,7 +492,7 @@ var StartReview = function (_React$Component12) {
             React.createElement(Button, {
               "class": "button-green ",
               text: "Next",
-              click: renderStartReview
+              click: this.IncrementItem
             })
           )
         ),
