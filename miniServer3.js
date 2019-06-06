@@ -122,6 +122,8 @@ app.get('/query', function (req, res) { res.send('HTTP query!') });
 app.get('/query', queryHandler);   // if not, is it a valid query?
 app.get('/startreview', startReviewHandler);
 app.get('/start_review/startreview', startReviewHandler);
+app.get('/add/translate', translateHandler);   // if not, is it a valid translate query?
+app.get('/add/store', storeHandler);   // if not, is it a valid store query?
 app.get('/translate', translateHandler);   // if not, is it a valid translate query?
 app.get('/store', storeHandler);   // if not, is it a valid store query?
 
