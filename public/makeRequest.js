@@ -26,7 +26,7 @@ export function renderStartReview() {
     xhr.onload = function () {
       let responseStr = xhr.responseText; // get the JSON string
       let object = JSON.parse(responseStr); // turn it into an object
-      // console.log(object);
+      console.log(object);
       return object;
       // console.log(JSON.stringify(object, undefined, 2));  // print it out as a string, nicely formatted
       // let myWord = JSON.stringify(object.Spanish, undefined, 2);
