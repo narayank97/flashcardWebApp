@@ -306,7 +306,7 @@ passport.deserializeUser((dbRowID, done) => {
     const checkFlashcards = 'SELECT * FROM Flashcards WHERE googleID = ' + dbRowID;
     console.log("!!!!!!!!!!!!!!!!!!!!!!--" + dbRowID);
     userArr = [];
-    db.get(checkFlashcards, (err, row) => {
+    db.all(checkFlashcards, (err, row) => {
         if (err) {
             return console.error(err.message);
         }
