@@ -90,10 +90,10 @@ class Footer extends React.Component {
 class Google extends React.Component {
   render() {
     return (
-      <div className="google">
-        <img src="./assets/google.jpg" />
-        <p>Log in with Google</p>
-      </div>
+        <a href={'/auth/google'} className="google">
+          <img src="./assets/google.jpg" />
+          <p>Log in with Google</p>
+        </a>
     );
   }
 }

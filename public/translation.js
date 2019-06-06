@@ -189,8 +189,8 @@ var Google = function (_React$Component6) {
     key: "render",
     value: function render() {
       return React.createElement(
-        "div",
-        { className: "google" },
+        "a",
+        { href: '/auth/google', className: "google" },
         React.createElement("img", { src: "./assets/google.jpg" }),
         React.createElement(
           "p",
