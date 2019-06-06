@@ -9,6 +9,7 @@ const sqlite = require('sqlite3');
 
 let userArr = [];
 let userName;
+let newUser = false;
 
 // Google login credentials, used when the user contacts
 // Google, to tell them where he is trying to login to, and show
@@ -110,8 +111,15 @@ app.get('/auth/redirect',
 	// will come back here to send back the response
 	// ...with a cookie in it for the Browser! 
 	function (req, res) {
-	    console.log('Logged in and using cookies!')
-	    res.redirect('/');
+        console.log('Logged in and using cookies!')
+        if(newUser == true){
+            res.redirect('/add');
+        }
+        else
+        {
+            res.redirect('/start_review');
+        }
+	    
 	});
 
 // static files in /user are only available after login
@@ -229,13 +237,15 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     
     db.get( 'SELECT * FROM Users WHERE googleID = '+ profile.id,
     function dataCallback(err, rowData) {
-        if (err) { 
+        if (err) {
+            newUser = false; 
             console.log("error: ",err); 
             done(null, dbRowID); 
         }
         else { 
             const cmdStr = 'INSERT into Users (googleID,firstName,lastName) VALUES (@0, @1, @2)';
             db.run(cmdStr, dbRowID, userFirstName, userLastName, insertCallback);
+            newUser = true;
             done(null, dbRowID); 
         }
     });
