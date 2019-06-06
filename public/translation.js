@@ -355,6 +355,7 @@ var Card = function (_React$Component11) {
     _this11.flip = function () {
       if (userInput === cards[index].english) {
         _this11.correct = true;
+        cards[index].correct++;
       }
       console.log(_this11.correct);
       _this11.setState({ flipped: !_this11.state.flipped });
@@ -529,6 +530,7 @@ var StartReview = function (_React$Component12) {
         console.log(items);
         cards = items;
         console.log(cards[0].spanish);
+        console.log(cards[0].id);
         // return (
 
         return React.createElement(

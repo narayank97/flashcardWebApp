@@ -178,6 +178,7 @@ class Card extends React.Component {
   flip = () => {
     if (userInput === cards[index].english) {
       this.correct = true;
+      cards[index].correct++;
     }
     console.log(this.correct);
     this.setState({ flipped: !this.state.flipped });
@@ -313,6 +314,7 @@ class StartReview extends React.Component {
       console.log(items);
       cards = items;
       console.log(cards[0].spanish);
+      console.log(cards[0].id);
       // return (
 
       return (
