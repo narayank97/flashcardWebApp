@@ -312,6 +312,7 @@ class StartReview extends React.Component {
       // console.log("We are here");
       console.log(items);
       cards = items;
+      console.log(cards[0].spanish);
       // return (
 
       return (

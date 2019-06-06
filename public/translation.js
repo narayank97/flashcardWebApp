@@ -528,6 +528,7 @@ var StartReview = function (_React$Component12) {
         // console.log("We are here");
         console.log(items);
         cards = items;
+        console.log(cards[0].spanish);
         // return (
 
         return React.createElement(

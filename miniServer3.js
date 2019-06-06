@@ -313,7 +313,8 @@ passport.deserializeUser((dbRowID, done) => {
         if (row) {
             console.log("HELLLOOOOO");
             let userData = { userData: row };
-            userArr.push(row)
+            // userArr.push(row)
+            userArr = row;
             // userArr.push(JSON.stringify(row))
             // console.log("YEET "+userData);
             console.log("NO JSON " + row);
