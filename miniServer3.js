@@ -393,6 +393,7 @@ function storeHandler(req, res, next,dbRowID) {
     const db = new sqlite3.Database(dbFileName);  // object, not database.
     let url = req.url;
     let wordObj = req.query;
+    console.log("??????????? ______"+dbRowID);
     let myUsername = dbRowID;
     console.log(wordObj);
     if ((wordObj.english != undefined) && (wordObj.spanish != undefined)) {
