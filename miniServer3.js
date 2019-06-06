@@ -272,12 +272,12 @@ passport.deserializeUser((dbRowID, done) => {
             // console.log("YEET "+userData);
             console.log("NO JSON " + row);
             console.log("WITH JSON "+JSON.stringify(row));
-            done(null, userData);
+            done(null, dbRowID);
         
         } 
         else {
             let userData = {userData: "data from db row goes here"};
-            done(null, userData);
+            done(null, dbRowID);
         // insert the user since you can't find it in the db
         // You need to call done() here
         }
@@ -397,7 +397,7 @@ function storeHandler(req, res, next) {
     let url = req.url;
     let wordObj = req.query;
     
-    let myUser = req.user.googleID;
+    let myUser = req.user;
     let myUsername = myUser;
     console.log("??????????? ______"+myUsername);
     console.log(wordObj);
