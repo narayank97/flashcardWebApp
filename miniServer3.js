@@ -112,7 +112,7 @@ app.get('/auth/redirect',
 	// ...with a cookie in it for the Browser! 
 	function (req, res) {
         console.log('Logged in and using cookies!')
-        if(newUser == true){
+        if(newUser == false){
             res.redirect('/add');
         }
         else
