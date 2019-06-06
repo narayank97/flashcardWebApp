@@ -111,7 +111,7 @@ app.get('/auth/redirect',
 	// ...with a cookie in it for the Browser! 
 	function (req, res) {
 	    console.log('Logged in and using cookies!')
-	    res.redirect('/user/hello.html');
+	    res.redirect('/');
 	});
 
 // static files in /user are only available after login
