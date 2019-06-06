@@ -1,5 +1,3 @@
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -443,10 +441,12 @@ var StartReview = function (_React$Component12) {
           correct: 0
         }
       ];*/
+
       // console.log(cards[0].spanish);
-      this.cur_card_text = cards[this.state.clicks].spanish;
-      console.log(_typeof(this.cur_card_text));
-      console.log(this.cur_card_text);
+      // this.cur_card_text = cards[this.state.clicks].spanish;
+      // console.log(typeof this.cur_card_text);
+      // console.log(this.cur_card_text);
+
       // let username = renderUserName();
       // console.log(JSON.stringify(username));
       // console.log(username);

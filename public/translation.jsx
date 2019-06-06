@@ -243,10 +243,12 @@ class StartReview extends React.Component {
         correct: 0
       }
     ];*/
+    
     // console.log(cards[0].spanish);
-    this.cur_card_text = cards[this.state.clicks].spanish;
-    console.log(typeof this.cur_card_text);
-    console.log(this.cur_card_text);
+    // this.cur_card_text = cards[this.state.clicks].spanish;
+    // console.log(typeof this.cur_card_text);
+    // console.log(this.cur_card_text);
+
     // let username = renderUserName();
     // console.log(JSON.stringify(username));
     // console.log(username);
