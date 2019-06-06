@@ -218,8 +218,9 @@ class StartReview extends React.Component {
 
   componentDidMount() {
     //  window.addEventListener('load', renderStartReview);
-    // let cards = renderStartReview();
+    let cards = renderStartReview();
     // this.cards
+    /*
     cards = [
       {
         googleID: "2",
@@ -242,7 +243,7 @@ class StartReview extends React.Component {
         seen: 0,
         correct: 0
       }
-    ];
+    ];*/
     console.log(cards[0].spanish);
     this.cur_card_text = cards[this.state.clicks].spanish;
     console.log(typeof this.cur_card_text);

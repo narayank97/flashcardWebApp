@@ -418,27 +418,32 @@ var StartReview = function (_React$Component12) {
     key: "componentDidMount",
     value: function componentDidMount() {
       //  window.addEventListener('load', renderStartReview);
-      // let cards = renderStartReview();
+      var cards = renderStartReview();
       // this.cards
-      cards = [{
-        googleID: "2",
-        english: "hello",
-        spanish: "Hola",
-        seen: 0,
-        correct: 0
-      }, {
-        googleID: "2",
-        english: "bye",
-        spanish: "Adios",
-        seen: 0,
-        correct: 0
-      }, {
-        googleID: "2",
-        english: "yes",
-        spanish: "Si",
-        seen: 0,
-        correct: 0
-      }];
+      /*
+      cards = [
+        {
+          googleID: "2",
+          english: "hello",
+          spanish: "Hola",
+          seen: 0,
+          correct: 0
+        },
+        {
+          googleID: "2",
+          english: "bye",
+          spanish: "Adios",
+          seen: 0,
+          correct: 0
+        },
+        {
+          googleID: "2",
+          english: "yes",
+          spanish: "Si",
+          seen: 0,
+          correct: 0
+        }
+      ];*/
       console.log(cards[0].spanish);
       this.cur_card_text = cards[this.state.clicks].spanish;
       console.log(_typeof(this.cur_card_text));
