@@ -37,6 +37,7 @@ function startReviewHandler(req, res, next) {
     console.log("In Handler");
     console.log(userArr);
     res.json(userArr);
+    next();
 }
 
 
