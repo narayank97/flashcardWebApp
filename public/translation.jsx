@@ -4,7 +4,6 @@ import {
   renderStartReview
 } from "./makeRequest.js";
 
-
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
@@ -18,7 +17,12 @@ class Title extends React.Component {
   render() {
     return (
       <div className="title">
-        <Button class="button-blue" text={this.props.btntext} btnpath={this.props.btnpath} btnClick={this.btnClick} />
+        <Button
+          class="button-blue"
+          text={this.props.btntext}
+          btnpath={this.props.btnpath}
+          btnClick={this.btnClick}
+        />
         <h1>Lango!</h1>
       </div>
     );
@@ -36,7 +40,16 @@ class Button extends React.Component {
   render() {
     console.log(this.props.btnpath);
     return (
-      <div className={this.props.class} onClick={(this.props.click) ? this.props.click : ((this.props.btnpath === "add" ? this.btnClickAdd : this.btnClickReview))}>
+      <div
+        className={this.props.class}
+        onClick={
+          this.props.click
+            ? this.props.click
+            : this.props.btnpath === "add"
+            ? this.btnClickAdd
+            : this.btnClickReview
+        }
+      >
         <p>{this.props.text}</p>
       </div>
     );
@@ -176,7 +189,6 @@ class Card extends React.Component {
   }
 }
 
-
 class StartReview extends React.Component {
   // constructor(props){
   //   super(props);
@@ -186,9 +198,26 @@ class StartReview extends React.Component {
   // }
 
   // componentDidMount() {
-  //   this. makeRequest(... , callBackFunction) //very important,because js is async 
+  //   this. makeRequest(... , callBackFunction) //very important,because js is async
 
-  // } 
+  // }
+  constructor(props) {
+    super(props);
+    // this.handleLoad = this.handleLoad.bind(this);
+  }
+
+  componentDidMount() {
+    //  window.addEventListener('load', renderStartReview);
+    let cards = renderStartReview();
+    console.log(JSON.stringify(cards));
+    console.log("Hey");
+  }
+
+  // componentDidMount() {
+  //   fetch("/startreview")
+  //     .then(response => response.json())
+  //     .then(data => this.setState({ hits: data.hits }));
+  // }
 
   render() {
     return (
@@ -202,7 +231,11 @@ class StartReview extends React.Component {
             {/* <p>{this.props.input}</p> */}
           </div>
           <div className="btn-container">
-            <Button class="button-green " text="Next" click={renderStartReview} />
+            <Button
+              class="button-green "
+              text="Next"
+              click={renderStartReview}
+            />
           </div>
         </div>
         <Footer username="Daniel" />
@@ -260,7 +293,6 @@ class LogIn extends React.Component {
   }
 }
 
-
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/login" component={LogIn} />
@@ -268,10 +300,8 @@ ReactDOM.render(
     <Route path="/add" component={AddPage} />
     <Route path="*" component={StartReview} />
   </Router>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
-
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 

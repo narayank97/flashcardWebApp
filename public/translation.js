@@ -34,7 +34,12 @@ var Title = function (_React$Component) {
       return React.createElement(
         "div",
         { className: "title" },
-        React.createElement(Button, { "class": "button-blue", text: this.props.btntext, btnpath: this.props.btnpath, btnClick: this.btnClick }),
+        React.createElement(Button, {
+          "class": "button-blue",
+          text: this.props.btntext,
+          btnpath: this.props.btnpath,
+          btnClick: this.btnClick
+        }),
         React.createElement(
           "h1",
           null,
@@ -72,7 +77,10 @@ var Button = function (_React$Component2) {
       console.log(this.props.btnpath);
       return React.createElement(
         "div",
-        { className: this.props.class, onClick: this.props.click ? this.props.click : this.props.btnpath === "add" ? this.btnClickAdd : this.btnClickReview },
+        {
+          className: this.props.class,
+          onClick: this.props.click ? this.props.click : this.props.btnpath === "add" ? this.btnClickAdd : this.btnClickReview
+        },
         React.createElement(
           "p",
           null,
@@ -365,27 +373,41 @@ var Card = function (_React$Component11) {
 var StartReview = function (_React$Component12) {
   _inherits(StartReview, _React$Component12);
 
-  function StartReview() {
+  // constructor(props){
+  //   super(props);
+  //   this.state = {
+  //     data: 'Jordan Belfort'
+  //   }
+  // }
+
+  // componentDidMount() {
+  //   this. makeRequest(... , callBackFunction) //very important,because js is async
+
+  // }
+  function StartReview(props) {
     _classCallCheck(this, StartReview);
 
-    return _possibleConstructorReturn(this, (StartReview.__proto__ || Object.getPrototypeOf(StartReview)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (StartReview.__proto__ || Object.getPrototypeOf(StartReview)).call(this, props));
+    // this.handleLoad = this.handleLoad.bind(this);
   }
 
   _createClass(StartReview, [{
-    key: "render",
-
-    // constructor(props){
-    //   super(props);
-    //   this.state = {
-    //     data: 'Jordan Belfort'
-    //   }
-    // }
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      //  window.addEventListener('load', renderStartReview);
+      var cards = renderStartReview();
+      console.log(JSON.stringify(cards));
+      console.log("Hey");
+    }
 
     // componentDidMount() {
-    //   this. makeRequest(... , callBackFunction) //very important,because js is async 
+    //   fetch("/startreview")
+    //     .then(response => response.json())
+    //     .then(data => this.setState({ hits: data.hits }));
+    // }
 
-    // } 
-
+  }, {
+    key: "render",
     value: function render() {
       return React.createElement(
         "div",
@@ -403,7 +425,11 @@ var StartReview = function (_React$Component12) {
           React.createElement(
             "div",
             { className: "btn-container" },
-            React.createElement(Button, { "class": "button-green ", text: "Next", click: renderStartReview })
+            React.createElement(Button, {
+              "class": "button-green ",
+              text: "Next",
+              click: renderStartReview
+            })
           )
         ),
         React.createElement(Footer, { username: "Daniel" })
@@ -521,7 +547,7 @@ ReactDOM.render(React.createElement(
   React.createElement(Route, { path: "/start_review", component: StartReview }),
   React.createElement(Route, { path: "/add", component: AddPage }),
   React.createElement(Route, { path: "*", component: StartReview })
-), document.getElementById('root'));
+), document.getElementById("root"));
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 
