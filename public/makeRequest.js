@@ -22,6 +22,8 @@ export function renderStartReview() {
       alert("CORS not supported");
       return;
     }
+  // Actually send request to server
+  xhr.send();
   // }
 }
 

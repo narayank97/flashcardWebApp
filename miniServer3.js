@@ -65,6 +65,13 @@ app.use(passport.session());
 // Public static files
 app.get('/*',express.static('public'));
 
+// Public static files
+app.use('/login', express.static('public'));
+app.use('/add', express.static('public'));
+app.use('/start_review', express.static('public'));
+
+// app.get('/add', express.static('public'));
+
 // next, handler for url that starts login with Google.
 // The app (in public/login.html) redirects to here (not an AJAX request!)
 // Kicks off login process by telling Browser to redirect to
@@ -115,6 +122,11 @@ app.get('/query', queryHandler);   // if not, is it a valid query?
 app.get('/startreview', startReviewHandler);
 app.get('/translate', translateHandler);   // if not, is it a valid translate query?
 app.get('/store', storeHandler);   // if not, is it a valid store query?
+
+
+// app.get('/add', function (req, res) {
+//     res.send('/')
+// })
 
 // finally, not found...applies to everything
 app.use( fileNotFound );

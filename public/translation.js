@@ -517,9 +517,9 @@ var LogIn = function (_React$Component14) {
 ReactDOM.render(React.createElement(
   Router,
   { history: browserHistory },
+  React.createElement(Route, { path: "/login", component: LogIn }),
   React.createElement(Route, { path: "/start_review", component: StartReview }),
   React.createElement(Route, { path: "/add", component: AddPage }),
-  React.createElement(Route, { path: "/login.html", component: LogIn }),
   React.createElement(Route, { path: "*", component: StartReview })
 ), document.getElementById('root'));
 
