@@ -54,12 +54,20 @@ function incSeen(req, res, next) {
     let url = req.url;
     let myID = req.id;
 
+<<<<<<< HEAD
     if (myID != undefined) // got db stuff
+=======
+    if(myID != undefined) // got db stuff
+>>>>>>> 6a0ba7274d211f832f125c3d749e164c4694e382
     {
         const sqlite3 = require("sqlite3").verbose();  // use sqlite
         const fs = require("fs"); // file system
         const dbFileName = "Flashcards.db";
+<<<<<<< HEAD
         const cmdStr = 'Update MyTable Set seen = seen + 1 Where id = ' + myID;
+=======
+        const cmdStr = 'Update MyTable Set seen = seen + 1 Where id = '+myID;
+>>>>>>> 6a0ba7274d211f832f125c3d749e164c4694e382
         const db = new sqlite3.Database(dbFileName);  // object, not database.
         db.run(cmdStr);
         console.log("WE INCREMENTED THIS");
@@ -67,7 +75,11 @@ function incSeen(req, res, next) {
 
 
     // let qObj = req.query;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 6a0ba7274d211f832f125c3d749e164c4694e382
     res.json("Seen incremented");
 }
 
