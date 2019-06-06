@@ -405,6 +405,7 @@ var StartReview = function (_React$Component12) {
       if (_this12.state.clicks >= cards.length - 1) {
         _this12.setState({ clicks: 0 });
       }
+      console.log(_this12.state.clicks);
       index = _this12.state.clicks;
     };
 
@@ -498,9 +499,6 @@ var StartReview = function (_React$Component12) {
     value: function render() {
       var _this14 = this;
 
-      this.componentDidMount();
-
-      // console.log("In Render", this.cards);
       var _state = this.state,
           error = _state.error,
           isLoaded = _state.isLoaded,
@@ -520,21 +518,11 @@ var StartReview = function (_React$Component12) {
           "Loading..."
         );
       } else {
-        console.log("We are here");
-        console.log(items);
+        // console.log("We are here");
+        // console.log(items);
         cards = items;
         // return (
 
-        //   <ul>
-        //     {items.map(item => (
-        //       <li key={item.name}>
-        //         {item.name} {item.price}
-        //       </li>
-        //     ))}
-        //   </ul>
-        // );
-
-        // cards = this.cards;
         return React.createElement(
           "div",
           { className: "col" },

@@ -286,6 +286,7 @@ class StartReview extends React.Component {
     if (this.state.clicks >= cards.length - 1) {
       this.setState({ clicks: 0 });
     }
+    console.log(this.state.clicks);
     index = this.state.clicks;
   };
 
@@ -298,30 +299,18 @@ class StartReview extends React.Component {
   }
 
   render() {
-    this.componentDidMount();
 
-    // console.log("In Render", this.cards);
     const { error, isLoaded, items } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
-      console.log("We are here");
-      console.log(items);
-      cards = items
+      // console.log("We are here");
+      // console.log(items);
+      cards = items;
       // return (
 
-      //   <ul>
-      //     {items.map(item => (
-      //       <li key={item.name}>
-      //         {item.name} {item.price}
-      //       </li>
-      //     ))}
-      //   </ul>
-      // );
-
-      // cards = this.cards;
       return (
         <div className="col">
           <Title btntext="Add" btnpath="add" />
