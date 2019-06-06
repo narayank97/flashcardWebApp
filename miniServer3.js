@@ -8,7 +8,7 @@ const GoogleStrategy = require('passport-google-oauth20');
 const sqlite = require('sqlite3');
 
 let userArr = [];
-let signedInUser;
+let userName;
 
 // Google login credentials, used when the user contacts
 // Google, to tell them where he is trying to login to, and show
@@ -37,6 +37,15 @@ function startReviewHandler(req, res, next) {
     console.log("In Handler");
     console.log(userArr);
     res.json(userArr);
+}
+
+function getUserName(req, res, next) {
+    console.log("In Handler");
+    let url = req.url;
+    // let qObj = req.query;
+    console.log("In Handler");
+    console.log(userName);
+    res.json(userName);
 }
 
 
@@ -121,6 +130,9 @@ app.get('/query', function (req, res) { res.send('HTTP query!') });
 
 app.get('/query', queryHandler);   // if not, is it a valid query?
 app.get('/startreview', startReviewHandler);
+app.get('/getusername', getUserName);
+app.get('/start_review/getusername', getUserName);
+app.get('add/getusername', getUserName);
 app.get('/start_review/startreview', startReviewHandler);
 app.get('/add/translate', translateHandler);   // if not, is it a valid translate query?
 app.get('/add/store', storeHandler);   // if not, is it a valid store query?
@@ -187,7 +199,7 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     let dbRowID = profile.id;  // temporary! Should be the real unique
     let userFirstName = profile.name.givenName;
     let userLastName = profile.name.familyName;
-    signedInUser = dbRowID;
+    userName = userFirstName+" "+userLastName;
     console.log("HELLOOOOOO");
     console.log(dbRowID);
     console.log(userFirstName);
