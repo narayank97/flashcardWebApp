@@ -8,6 +8,7 @@ const GoogleStrategy = require('passport-google-oauth20');
 const sqlite = require('sqlite3');
 
 let userArr = [];
+let signedInUser;
 
 // Google login credentials, used when the user contacts
 // Google, to tell them where he is trying to login to, and show
@@ -183,6 +184,7 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     let dbRowID = profile.id;  // temporary! Should be the real unique
     let userFirstName = profile.name.givenName;
     let userLastName = profile.name.familyName;
+    signedInUser = dbRowID;
     console.log("HELLOOOOOO");
     console.log(dbRowID);
     console.log(userFirstName);
@@ -252,7 +254,8 @@ passport.deserializeUser((dbRowID, done) => {
     const dbFileName = "Flashcards.db";
     // makes the object that represents the database in our code
     const db = new sqlite3.Database(dbFileName);  // object, not database.
-    const checkFlashcards = 'SELECT * FROM Flashcards WHERE googleID = '+ 116122930341570023991;
+    const checkFlashcards = 'SELECT * FROM Flashcards WHERE googleID = '+ dbRowID;
+    console.log("!!!!!!!!!!!!!!!!!!!!!!--"+dbRowID);
 
     db.get(checkFlashcards, (err, row) => {
         if (err) {
@@ -381,7 +384,7 @@ function dumpDB() {
 }
 
 //http://server162.site:port/store?english=example phrase&spanish=예시 문구
-function storeHandler(req, res, next) {
+function storeHandler(req, res, next,dbRowID) {
     const sqlite3 = require("sqlite3").verbose();  // use sqlite
     const fs = require("fs"); // file system
     const dbFileName = "Flashcards.db";
@@ -390,7 +393,7 @@ function storeHandler(req, res, next) {
     const db = new sqlite3.Database(dbFileName);  // object, not database.
     let url = req.url;
     let wordObj = req.query;
-    let myUsername = 116122930341570023991;
+    let myUsername = dbRowID;
     console.log(wordObj);
     if ((wordObj.english != undefined) && (wordObj.spanish != undefined)) {
         let eng = wordObj.english;
