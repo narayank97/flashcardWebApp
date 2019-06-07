@@ -171,6 +171,7 @@ class Card extends React.Component {
   constructor(props) {
     super(props);
     this.correct = false;
+    this.cardFlipCheck = false;
     this.state = {
       flipped: false
     };
@@ -179,8 +180,14 @@ class Card extends React.Component {
 
   flip = () => {
     if (userInput === cards[this.props.index].english) {
-      this.correct = true;
-      cards[this.props.index].correct++;
+      if (this.cardFlipCheck === false){
+        this.correct = true;
+        cards[this.props.index].correct++;
+        this.cardFlipCheck = true;
+      }
+    }
+    else {
+      this.correct = false;
     }
     console.log(this.correct);
     isCorrect = this.correct;

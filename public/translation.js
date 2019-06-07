@@ -355,8 +355,13 @@ var Card = function (_React$Component11) {
 
     _this11.flip = function () {
       if (userInput === cards[_this11.props.index].english) {
-        _this11.correct = true;
-        cards[_this11.props.index].correct++;
+        if (_this11.cardFlipCheck === false) {
+          _this11.correct = true;
+          cards[_this11.props.index].correct++;
+          _this11.cardFlipCheck = true;
+        }
+      } else {
+        _this11.correct = false;
       }
       console.log(_this11.correct);
       isCorrect = _this11.correct;
@@ -366,6 +371,7 @@ var Card = function (_React$Component11) {
     };
 
     _this11.correct = false;
+    _this11.cardFlipCheck = false;
     _this11.state = {
       flipped: false
     };
