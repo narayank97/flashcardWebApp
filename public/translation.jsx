@@ -381,6 +381,16 @@ class StartReview extends React.Component {
 }
 
 class AddPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      nameLoaded: false,
+      items: [],
+      clicks: 0,
+      show: true
+    };
+  }
   componentDidMount() {
     Promise.all([
       fetch("/getusername")

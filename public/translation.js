@@ -601,10 +601,19 @@ var StartReview = function (_React$Component12) {
 var AddPage = function (_React$Component13) {
   _inherits(AddPage, _React$Component13);
 
-  function AddPage() {
+  function AddPage(props) {
     _classCallCheck(this, AddPage);
 
-    return _possibleConstructorReturn(this, (AddPage.__proto__ || Object.getPrototypeOf(AddPage)).apply(this, arguments));
+    var _this15 = _possibleConstructorReturn(this, (AddPage.__proto__ || Object.getPrototypeOf(AddPage)).call(this, props));
+
+    _this15.state = {
+      error: null,
+      nameLoaded: false,
+      items: [],
+      clicks: 0,
+      show: true
+    };
+    return _this15;
   }
 
   _createClass(AddPage, [{
