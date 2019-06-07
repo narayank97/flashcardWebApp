@@ -54,13 +54,13 @@ function incSeenServer(req, res, next) {
     let url = req.url;
     let myIDobj = req.query;
     console.log("url is :"+ url);
-    console.log("THIS IS MY IDD DAWG                   :"+myIDobj.id);
-    if (myIDobj.id != undefined) // got db stuff
+    console.log("THIS IS MY IDD DAWG                   :"+myIDobj.id+1);
+    if (myIDobj.id + 1 != undefined) // got db stuff
     {
         const sqlite3 = require("sqlite3").verbose();  // use sqlite
         const fs = require("fs"); // file system
         const dbFileName = "Flashcards.db";
-        const cmdStr = 'Update Flashcards Set seen = seen + 1 Where id = ' + myIDobj.id;
+        const cmdStr = 'Update Flashcards Set seen = seen + 1 Where id = ' + myIDobj.id + 1;
         const db = new sqlite3.Database(dbFileName);  // object, not database.
         db.all(cmdStr);
         console.log("WE INCREMENTED THIS");
