@@ -272,8 +272,8 @@ class StartReview extends React.Component {
           error => {
             this.setState({
               nameLoaded: true,
-              // error,
-              username: "Daniel",
+              error, 
+              // username: "Daniel",
               clicks: 0
             });
           }

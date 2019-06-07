@@ -481,8 +481,8 @@ var StartReview = function (_React$Component12) {
       }, function (error) {
         _this13.setState({
           nameLoaded: true,
-          // error,
-          username: "Daniel",
+          error: error,
+          // username: "Daniel",
           clicks: 0
         });
       })]);
