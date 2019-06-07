@@ -184,6 +184,7 @@ class Card extends React.Component {
     }
     console.log(this.correct);
     isCorrect = this.correct;
+    console.log("ABOUT TO CALL CORRECT CLIENT");
     correctIncrementClient(this.state.clicks,
       isCorrect,
       cards[this.props.index].seen)

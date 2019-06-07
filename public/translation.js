@@ -6,7 +6,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import { makeCorsRequest, makeCorsRequestStore, renderStartReview, renderUserName, seenIncrementClient } from "./makeRequest.js";
+import { makeCorsRequest, makeCorsRequestStore, renderStartReview, renderUserName, seenIncrementClient, correctIncrementClient } from "./makeRequest.js";
 
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
@@ -360,6 +360,8 @@ var Card = function (_React$Component11) {
       }
       console.log(_this11.correct);
       isCorrect = _this11.correct;
+      console.log("ABOUT TO CALL CORRECT CLIENT");
+      correctIncrementClient(_this11.state.clicks, isCorrect, cards[_this11.props.index].seen);
       _this11.setState({ flipped: !_this11.state.flipped });
     };
 
@@ -486,32 +488,6 @@ var StartReview = function (_React$Component12) {
           clicks: 0
         });
       })]);
-
-      /*
-      cards = [
-        {
-          googleID: "2",
-          english: "hello",
-          spanish: "Hola",
-          seen: 0,
-          correct: 0
-        },
-        {
-          googleID: "2",
-          english: "bye",
-          spanish: "Adios",
-          seen: 0,
-          correct: 0
-        },
-        {
-          googleID: "2",
-          english: "yes",
-          spanish: "Si",
-          seen: 0,
-          correct: 0
-        }
-      ];
-      */
     }
   }, {
     key: "onFocus",
