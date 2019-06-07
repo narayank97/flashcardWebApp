@@ -60,7 +60,7 @@ function incSeenServer(req, res, next) {
         const sqlite3 = require("sqlite3").verbose();  // use sqlite
         const fs = require("fs"); // file system
         const dbFileName = "Flashcards.db";
-        const cmdStr = 'Update Flashcards Set seen = seen + 1 Where id = ' + myID;
+        const cmdStr = 'Update Flashcards Set seen = seen + 1 Where id = ' + myIDobj.id;
         const db = new sqlite3.Database(dbFileName);  // object, not database.
         db.all(cmdStr);
         console.log("WE INCREMENTED THIS");
