@@ -608,6 +608,28 @@ var AddPage = function (_React$Component13) {
   }
 
   _createClass(AddPage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this16 = this;
+
+      Promise.all([fetch("/getusername").then(function (res) {
+        return res.json();
+      }).then(function (result) {
+        _this16.setState({
+          nameLoaded: true,
+          username: result,
+          clicks: 0
+        });
+      }, function (error) {
+        _this16.setState({
+          nameLoaded: true,
+          error: error,
+          // username: "Daniel",
+          clicks: 0
+        });
+      })]);
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
@@ -641,7 +663,7 @@ var AddPage = function (_React$Component13) {
             })
           )
         ),
-        React.createElement(Footer, { username: "Daniel" })
+        React.createElement(Footer, { username: username })
       );
     }
   }]);

@@ -381,6 +381,29 @@ class StartReview extends React.Component {
 }
 
 class AddPage extends React.Component {
+  componentDidMount() {
+    Promise.all([
+      fetch("/getusername")
+        .then(res => res.json())
+        .then(
+          result => {
+            this.setState({
+              nameLoaded: true,
+              username: result,
+              clicks: 0
+            });
+          },
+          error => {
+            this.setState({
+              nameLoaded: true,
+              error,
+              // username: "Daniel",
+              clicks: 0
+            });
+          }
+        )
+    ]);
+  }
   render() {
     return (
       <div className="col">
@@ -402,7 +425,7 @@ class AddPage extends React.Component {
             />
           </div>
         </div>
-        <Footer username="Daniel" />
+        <Footer username={username} />
       </div>
     );
   }
