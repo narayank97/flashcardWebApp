@@ -55,7 +55,7 @@ function incSeenServer(req, res, next) {
     let myIDobj = req.query;
     console.log("url is :"+ url);
     console.log("THIS IS MY IDD DAWG                   :"+myIDobj.id);
-    
+
     if (myIDobj.id != undefined) // got db stuff
     {
         const sqlite3 = require("sqlite3").verbose();  // use sqlite
@@ -70,6 +70,29 @@ function incSeenServer(req, res, next) {
 
     // let qObj = req.query;
     res.json("Seen incremented");
+}
+
+function incCorrectServer(req, res, next) {
+    console.log("Incremented Correct");
+    let url = req.url;
+    let myIDobj = req.query;
+    console.log("url is :"+ url);
+    console.log("THIS IS MY ID DAWG                   :"+myIDobj.id);
+    
+    if (myIDobj.id != undefined) // got db stuff
+    {
+        const sqlite3 = require("sqlite3").verbose();  // use sqlite
+        const fs = require("fs"); // file system
+        const dbFileName = "Flashcards.db";
+        const cmdStr = 'Update Flashcards Set correct = correct + 1 Where id = ' + myIDobj.id;
+        const db = new sqlite3.Database(dbFileName);  // object, not database.
+        db.all(cmdStr);
+        console.log("WE INCREMENTED  CORRECT THIS");
+    }
+
+
+    // let qObj = req.query;
+    res.json("Correct incremented");
 }
 
 
@@ -164,14 +187,17 @@ app.get('/query', function (req, res) { res.send('HTTP query!') });
 
 app.get('/query', queryHandler);   // if not, is it a valid query?
 app.get('/seen',incSeenServer);
+app.get('/correct',incCorrectServer);
 app.get('/startreview', startReviewHandler);
 app.get('/getusername', getUserName);
 app.get('/start_review/getusername', getUserName);
 app.get('/start_review/seen',incSeenServer);
+app.get('/start_review/correct',incCorrectServer);
 app.get('add/getusername', getUserName);
 app.get('/start_review/startreview', startReviewHandler);
 app.get('/add/translate', translateHandler);   // if not, is it a valid translate query?
 app.get('/add/seen',incSeenServer);
+app.get('/add/correct',incCorrectServer);
 app.get('/add/store', storeHandler);   // if not, is it a valid store query?
 app.get('/translate', translateHandler);   // if not, is it a valid translate query?
 app.get('/store', storeHandler);   // if not, is it a valid store query?

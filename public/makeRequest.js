@@ -64,6 +64,40 @@ export function seenIncrementClient(id, isCorrect, seen) {
   xhr.send();
 }
 
+export function correctIncrementClient(id, isCorrect, seen) {
+  //let input = document.getElementById("myWord").value;
+  id = id + 1;
+  console.log("In Increment Client", id, isCorrect);
+  let url = "correct?id="+id;
+  if(isCorrect == true)
+  {
+    let xhr = createCORSRequest("GET", url);
+
+    // checking if browser does CORS
+    if (!xhr) {
+      alert("CORS not supported");
+      return;
+    }
+
+    // Load some functions into response handlers.
+    xhr.onload = function() {
+      console.log("Correct was incremented");
+    };
+
+    xhr.onerror = function() {
+      alert("Woops, there was an error making the request.");
+    };
+
+    // Actually send request to server
+    xhr.send();
+  }
+  else
+  {
+    console.log("DO NOTHING");
+  }
+  
+}
+
 export function renderUserName() {
   // if (event.keyCode == 13) {
     console.log("DEBUG");
