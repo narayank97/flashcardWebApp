@@ -555,8 +555,7 @@ var StartReview = function (_React$Component12) {
         // cards = items;
 
         // console.log(cards[0].spanish);
-        // console.log(cards[0].id);
-        // return (
+        // console.log(cards[0].id); 
 
         return React.createElement(
           "div",

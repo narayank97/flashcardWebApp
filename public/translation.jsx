@@ -276,7 +276,7 @@ class StartReview extends React.Component {
               // username: "Daniel",
               clicks: 0
             });
-          }
+          } 
         )
     ]);
 
@@ -346,8 +346,7 @@ class StartReview extends React.Component {
       // cards = items;
 
       // console.log(cards[0].spanish);
-      // console.log(cards[0].id);
-      // return (
+      // console.log(cards[0].id); 
 
       return (
         <div className="col">
