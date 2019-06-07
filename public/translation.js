@@ -552,7 +552,7 @@ var StartReview = function (_React$Component12) {
         // console.log("We are here");
         console.log(items);
         console.log("UserName", username);
-        // cards = items;
+        cards = items;
 
         // console.log(cards[0].spanish);
         // console.log(cards[0].id); 
