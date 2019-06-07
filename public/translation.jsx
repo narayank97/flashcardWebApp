@@ -180,8 +180,8 @@ class Card extends React.Component {
 
   flip = () => {
     if (userInput === cards[this.props.index].english) {
+      this.correct = true;
       if (this.cardFlipCheck === false){
-        this.correct = true;
         cards[this.props.index].correct++;
         this.cardFlipCheck = true;
       }
