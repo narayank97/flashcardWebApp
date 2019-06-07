@@ -53,8 +53,8 @@ class Button extends React.Component {
           this.props.click
             ? this.props.click
             : this.props.btnpath === "add"
-            ? this.btnClickAdd
-            : this.btnClickReview
+              ? this.btnClickAdd
+              : this.btnClickReview
         }
       >
         <p>{this.props.text}</p>
@@ -272,11 +272,11 @@ class StartReview extends React.Component {
           error => {
             this.setState({
               nameLoaded: true,
-              error, 
+              error,
               // username: "Daniel",
               clicks: 0
             });
-          } 
+          }
         )
     ]);
 
@@ -405,29 +405,37 @@ class AddPage extends React.Component {
     ]);
   }
   render() {
-    return (
-      <div className="col">
-        <Title btntext="Start Review" btnpath="review" />
-        <div className="column-container">
-          <div className="row-container">
-            <div className="medium-card">
-              <input id="myWord" onKeyPress={makeCorsRequest} />
+    const { error, isLoaded, nameLoaded, items, username } = this.state;
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!nameLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        <div className="col">
+          <Title btntext="Start Review" btnpath="review" />
+          <div className="column-container">
+            <div className="row-container">
+              <div className="medium-card">
+                <input id="myWord" onKeyPress={makeCorsRequest} />
+              </div>
+              <div className="medium-card">
+                <p id="outputGoesHere" />
+              </div>
             </div>
-            <div className="medium-card">
-              <p id="outputGoesHere" />
+            <div className="btn-container">
+              <Button
+                class="button-green "
+                text="Save"
+                click={makeCorsRequestStore}
+              />
             </div>
           </div>
-          <div className="btn-container">
-            <Button
-              class="button-green "
-              text="Save"
-              click={makeCorsRequestStore}
-            />
-          </div>
+          <Footer username={username} />
         </div>
-        <Footer username={username} />
-      </div>
-    );
+      );
+    }
+    
   }
 }
 

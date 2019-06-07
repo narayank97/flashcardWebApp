@@ -632,39 +632,61 @@ var AddPage = function (_React$Component13) {
   }, {
     key: "render",
     value: function render() {
-      return React.createElement(
-        "div",
-        { className: "col" },
-        React.createElement(Title, { btntext: "Start Review", btnpath: "review" }),
-        React.createElement(
+      var _state2 = this.state,
+          error = _state2.error,
+          isLoaded = _state2.isLoaded,
+          nameLoaded = _state2.nameLoaded,
+          items = _state2.items,
+          username = _state2.username;
+
+      if (error) {
+        return React.createElement(
           "div",
-          { className: "column-container" },
+          null,
+          "Error: ",
+          error.message
+        );
+      } else if (!nameLoaded) {
+        return React.createElement(
+          "div",
+          null,
+          "Loading..."
+        );
+      } else {
+        return React.createElement(
+          "div",
+          { className: "col" },
+          React.createElement(Title, { btntext: "Start Review", btnpath: "review" }),
           React.createElement(
             "div",
-            { className: "row-container" },
+            { className: "column-container" },
             React.createElement(
               "div",
-              { className: "medium-card" },
-              React.createElement("input", { id: "myWord", onKeyPress: makeCorsRequest })
+              { className: "row-container" },
+              React.createElement(
+                "div",
+                { className: "medium-card" },
+                React.createElement("input", { id: "myWord", onKeyPress: makeCorsRequest })
+              ),
+              React.createElement(
+                "div",
+                { className: "medium-card" },
+                React.createElement("p", { id: "outputGoesHere" })
+              )
             ),
             React.createElement(
               "div",
-              { className: "medium-card" },
-              React.createElement("p", { id: "outputGoesHere" })
+              { className: "btn-container" },
+              React.createElement(Button, {
+                "class": "button-green ",
+                text: "Save",
+                click: makeCorsRequestStore
+              })
             )
           ),
-          React.createElement(
-            "div",
-            { className: "btn-container" },
-            React.createElement(Button, {
-              "class": "button-green ",
-              text: "Save",
-              click: makeCorsRequestStore
-            })
-          )
-        ),
-        React.createElement(Footer, { username: username })
-      );
+          React.createElement(Footer, { username: username })
+        );
+      }
     }
   }]);
 
