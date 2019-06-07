@@ -2,7 +2,8 @@ import {
   makeCorsRequest,
   makeCorsRequestStore,
   renderStartReview,
-  renderUserName
+  renderUserName,
+  seenIncrementClient
 } from "./makeRequest.js";
 
 var Router = ReactRouter.Router;
@@ -12,7 +13,8 @@ var Link = ReactRouter.Link;
 var browserHistory = ReactRouter.browserHistory;
 
 let cards = [];
-let index = 0;
+let isCorrect = false;
+// let index = 0;
 let userInput = "";
 
 class Title extends React.Component {
@@ -153,7 +155,6 @@ class CardBack extends React.Component {
     return (
       <div className="card-side side-back">
         <div className="card-side-container">
-          {/* <h2 id="congrats">{this.props.text}</h2> */}
           <div className="refresh">
             <img src="./assets/noun_Refresh_2310283.svg" />
           </div>
@@ -176,23 +177,25 @@ class Card extends React.Component {
   }
 
   flip = () => {
-    if (userInput === cards[index].english) {
+    if (userInput === cards[this.props.index].english) {
       this.correct = true;
-      cards[index].correct++;
+      cards[this.props.index].correct++;
     }
     console.log(this.correct);
+    isCorrect = this.correct;
     this.setState({ flipped: !this.state.flipped });
   };
   render() {
-    // this.componentDidMount();
     return (
       <div
         onClick={this.flip}
         className={"card-container" + (this.state.flipped ? " flipped" : "")}
       >
-        {/* <div className="card-container"> */}
         <div className="card-body">
-          <CardBack text={this.props.text} correct={this.correct} />
+          <CardBack
+            text={cards[this.props.index].english}
+            correct={this.correct}
+          />
 
           <CardFront text={this.props.text} />
         </div>
@@ -211,18 +214,12 @@ class StartReview extends React.Component {
       isLoaded: false,
       items: [],
       clicks: 0,
-      show: true,
+      show: true
     };
   }
 
   componentDidMount() {
-    //  window.addEventListener('load', renderStartReview);
-    // this.cards = renderStartReview();
-    // this.cards
-    // fetch('/startreview')
-    //   .then(response => response.json())
-    //   .then(data => this.setState({ hits: data.hits }));
-
+    /*
     fetch("/startreview")
       .then(res => res.json())
       .then(
@@ -233,9 +230,6 @@ class StartReview extends React.Component {
             clicks: 0
           });
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
         error => {
           this.setState({
             isLoaded: true,
@@ -244,54 +238,91 @@ class StartReview extends React.Component {
           });
         }
       );
-    // this.cards = renderStartReview();
-    // cards = [
-    //   {
-    //     googleID: "2",
-    //     english: "hello",
-    //     spanish: "Hola",
-    //     seen: 0,
-    //     correct: 0
-    //   },
-    //   {
-    //     googleID: "2",
-    //     english: "bye",
-    //     spanish: "Adios",
-    //     seen: 0,
-    //     correct: 0
-    //   },
-    //   {
-    //     googleID: "2",
-    //     english: "yes",
-    //     spanish: "Si",
-    //     seen: 0,
-    //     correct: 0
-    //   }
-    // ];
+      */
 
-    console.log("Whats in here", this.cards);
+    Promise.all([
+      fetch("/startreview")
+        .then(res => res.json())
+        .then(
+          result => {
+            this.setState({
+              isLoaded: true,
+              items: result,
+              clicks: 0
+            });
+          },
+          error => {
+            this.setState({
+              isLoaded: true,
+              error,
+              clicks: 0
+            });
+          }
+        ),
+      fetch("/getusername")
+        .then(res => res.json())
+        .then(
+          result => {
+            this.setState({
+              nameLoaded: true,
+              username: result,
+              clicks: 0
+            });
+          },
+          error => {
+            this.setState({
+              nameLoaded: true,
+              // error,
+              username: "Daniel",
+              clicks: 0
+            });
+          }
+        )
+    ]);
 
-    // console.log(cards[0].spanish);
-    // this.cur_card_text = cards[this.state.clicks].spanish;
-    // console.log(typeof this.cur_card_text);
-    // console.log(this.cur_card_text);
-
-    // let username = renderUserName();
-    // console.log(JSON.stringify(username));
-    // console.log(username);
-    // console.log(JSON.stringify(cards));
-    // console.log("Hey");
+    /*
+    cards = [
+      {
+        googleID: "2",
+        english: "hello",
+        spanish: "Hola",
+        seen: 0,
+        correct: 0
+      },
+      {
+        googleID: "2",
+        english: "bye",
+        spanish: "Adios",
+        seen: 0,
+        correct: 0
+      },
+      {
+        googleID: "2",
+        english: "yes",
+        spanish: "Si",
+        seen: 0,
+        correct: 0
+      }
+    ];
+    */
   }
 
   IncrementItem = () => {
     console.log(this.state.clicks);
     cards[this.state.clicks].seen++;
+    seenIncrementClient(
+      this.state.clicks,
+      isCorrect,
+      cards[this.state.clicks].seen
+    );
+
     this.setState({ clicks: this.state.clicks + 1 });
     if (this.state.clicks >= cards.length - 1) {
       this.setState({ clicks: 0 });
     }
+
     console.log(this.state.clicks);
-    index = this.state.clicks;
+    isCorrect = false;
   };
 
   onFocus() {
@@ -303,25 +334,29 @@ class StartReview extends React.Component {
   }
 
   render() {
-
-    const { error, isLoaded, items } = this.state;
+    const { error, isLoaded, nameLoaded, items, username } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
+    } else if (!isLoaded || !nameLoaded) {
       return <div>Loading...</div>;
     } else {
       // console.log("We are here");
       console.log(items);
-      cards = items;
-      console.log(cards[0].spanish);
-      console.log(cards[0].id);
+      console.log("UserName", username);
+      // cards = items;
+
+      // console.log(cards[0].spanish);
+      // console.log(cards[0].id);
       // return (
 
       return (
         <div className="col">
           <Title btntext="Add" btnpath="add" />
           <div className="column-container">
-            <Card text={cards[index].spanish} />
+            <Card
+              text={cards[this.state.clicks].spanish}
+              index={this.state.clicks}
+            />
             <div className="small-card">
               <input
                 ref={input => {
@@ -339,7 +374,7 @@ class StartReview extends React.Component {
               />
             </div>
           </div>
-          <Footer username="Daniel" />
+          <Footer username={username} />
         </div>
       );
     }
@@ -351,7 +386,6 @@ class AddPage extends React.Component {
     return (
       <div className="col">
         <Title btntext="Start Review" btnpath="review" />
-        {/* <Button class="button-blue" text="Add" /> */}
         <div className="column-container">
           <div className="row-container">
             <div className="medium-card">
@@ -407,26 +441,3 @@ ReactDOM.render(
   </Router>,
   document.getElementById("root")
 );
-
-// ReactDOM.render(<App />, document.getElementById('root'));
-
-// StartReview PAGE
-
-// ReactDOM.render(
-//   <StartReview question="Hola Como Esta?" input="Hello! How are you?" />,
-//   document.getElementById("root")
-// );
-
-// FIRST TIME PAGE
-// ReactDOM.render(
-//   <AddPage  />,
-//   document.getElementById("root")
-// );
-
-// LOGIN PAGE
-// ReactDOM.render(<LogIn />, document.getElementById("root"));
-
-///////////////////////////////////////////////////////////
-
-// Render Card component
-// ReactDOM.render(<Card />, document.getElementById("root"));

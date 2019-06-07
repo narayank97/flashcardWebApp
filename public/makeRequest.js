@@ -38,8 +38,9 @@ export function renderStartReview() {
   // }
 }
 
-export function seenIncrementClient(id) {
+export function seenIncrementClient(id, isCorrect, seen) {
   //let input = document.getElementById("myWord").value;
+  console.log("In Increment Client", id, isCorrect);
   let url = "seen?id="+id;
   let xhr = createCORSRequest("GET", url);
 

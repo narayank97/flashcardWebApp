@@ -6,7 +6,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import { makeCorsRequest, makeCorsRequestStore, renderStartReview, renderUserName } from "./makeRequest.js";
+import { makeCorsRequest, makeCorsRequestStore, renderStartReview, renderUserName, seenIncrementClient } from "./makeRequest.js";
 
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
@@ -15,7 +15,8 @@ var Link = ReactRouter.Link;
 var browserHistory = ReactRouter.browserHistory;
 
 var cards = [];
-var index = 0;
+var isCorrect = false;
+// let index = 0;
 var userInput = "";
 
 var Title = function (_React$Component) {
@@ -353,11 +354,12 @@ var Card = function (_React$Component11) {
     var _this11 = _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).call(this, props));
 
     _this11.flip = function () {
-      if (userInput === cards[index].english) {
+      if (userInput === cards[_this11.props.index].english) {
         _this11.correct = true;
-        cards[index].correct++;
+        cards[_this11.props.index].correct++;
       }
       console.log(_this11.correct);
+      isCorrect = _this11.correct;
       _this11.setState({ flipped: !_this11.state.flipped });
     };
 
@@ -372,7 +374,6 @@ var Card = function (_React$Component11) {
   _createClass(Card, [{
     key: "render",
     value: function render() {
-      // this.componentDidMount();
       return React.createElement(
         "div",
         {
@@ -382,7 +383,10 @@ var Card = function (_React$Component11) {
         React.createElement(
           "div",
           { className: "card-body" },
-          React.createElement(CardBack, { text: this.props.text, correct: this.correct }),
+          React.createElement(CardBack, {
+            text: cards[this.props.index].english,
+            correct: this.correct
+          }),
           React.createElement(CardFront, { text: this.props.text })
         )
       );
@@ -403,12 +407,15 @@ var StartReview = function (_React$Component12) {
     _this12.IncrementItem = function () {
       console.log(_this12.state.clicks);
       cards[_this12.state.clicks].seen++;
+      seenIncrementClient(_this12.state.clicks, isCorrect, cards[_this12.state.clicks].seen);
+
       _this12.setState({ clicks: _this12.state.clicks + 1 });
       if (_this12.state.clicks >= cards.length - 1) {
         _this12.setState({ clicks: 0 });
       }
+
       console.log(_this12.state.clicks);
-      index = _this12.state.clicks;
+      isCorrect = false;
     };
 
     _this12.cur_card_text = "";
@@ -428,14 +435,28 @@ var StartReview = function (_React$Component12) {
     value: function componentDidMount() {
       var _this13 = this;
 
-      //  window.addEventListener('load', renderStartReview);
-      // this.cards = renderStartReview();
-      // this.cards
-      // fetch('/startreview')
-      //   .then(response => response.json())
-      //   .then(data => this.setState({ hits: data.hits }));
+      /*
+      fetch("/startreview")
+        .then(res => res.json())
+        .then(
+          result => {
+            this.setState({
+              isLoaded: true,
+              items: result,
+              clicks: 0
+            });
+          },
+          error => {
+            this.setState({
+              isLoaded: true,
+              error,
+              clicks: 0
+            });
+          }
+        );
+        */
 
-      fetch("/startreview").then(function (res) {
+      Promise.all([fetch("/startreview").then(function (res) {
         return res.json();
       }).then(function (result) {
         _this13.setState({
@@ -443,54 +464,54 @@ var StartReview = function (_React$Component12) {
           items: result,
           clicks: 0
         });
-      },
-      // Note: it's important to handle errors here
-      // instead of a catch() block so that we don't swallow
-      // exceptions from actual bugs in components.
-      function (error) {
+      }, function (error) {
         _this13.setState({
           isLoaded: true,
           error: error,
           clicks: 0
         });
-      });
-      // this.cards = renderStartReview();
-      // cards = [
-      //   {
-      //     googleID: "2",
-      //     english: "hello",
-      //     spanish: "Hola",
-      //     seen: 0,
-      //     correct: 0
-      //   },
-      //   {
-      //     googleID: "2",
-      //     english: "bye",
-      //     spanish: "Adios",
-      //     seen: 0,
-      //     correct: 0
-      //   },
-      //   {
-      //     googleID: "2",
-      //     english: "yes",
-      //     spanish: "Si",
-      //     seen: 0,
-      //     correct: 0
-      //   }
-      // ];
+      }), fetch("/getusername").then(function (res) {
+        return res.json();
+      }).then(function (result) {
+        _this13.setState({
+          nameLoaded: true,
+          username: result,
+          clicks: 0
+        });
+      }, function (error) {
+        _this13.setState({
+          nameLoaded: true,
+          // error,
+          username: "Daniel",
+          clicks: 0
+        });
+      })]);
 
-      console.log("Whats in here", this.cards);
-
-      // console.log(cards[0].spanish);
-      // this.cur_card_text = cards[this.state.clicks].spanish;
-      // console.log(typeof this.cur_card_text);
-      // console.log(this.cur_card_text);
-
-      // let username = renderUserName();
-      // console.log(JSON.stringify(username));
-      // console.log(username);
-      // console.log(JSON.stringify(cards));
-      // console.log("Hey");
+      /*
+      cards = [
+        {
+          googleID: "2",
+          english: "hello",
+          spanish: "Hola",
+          seen: 0,
+          correct: 0
+        },
+        {
+          googleID: "2",
+          english: "bye",
+          spanish: "Adios",
+          seen: 0,
+          correct: 0
+        },
+        {
+          googleID: "2",
+          english: "yes",
+          spanish: "Si",
+          seen: 0,
+          correct: 0
+        }
+      ];
+      */
     }
   }, {
     key: "onFocus",
@@ -510,7 +531,9 @@ var StartReview = function (_React$Component12) {
       var _state = this.state,
           error = _state.error,
           isLoaded = _state.isLoaded,
-          items = _state.items;
+          nameLoaded = _state.nameLoaded,
+          items = _state.items,
+          username = _state.username;
 
       if (error) {
         return React.createElement(
@@ -519,7 +542,7 @@ var StartReview = function (_React$Component12) {
           "Error: ",
           error.message
         );
-      } else if (!isLoaded) {
+      } else if (!isLoaded || !nameLoaded) {
         return React.createElement(
           "div",
           null,
@@ -528,9 +551,11 @@ var StartReview = function (_React$Component12) {
       } else {
         // console.log("We are here");
         console.log(items);
-        cards = items;
-        console.log(cards[0].spanish);
-        console.log(cards[0].id);
+        console.log("UserName", username);
+        // cards = items;
+
+        // console.log(cards[0].spanish);
+        // console.log(cards[0].id);
         // return (
 
         return React.createElement(
@@ -540,7 +565,10 @@ var StartReview = function (_React$Component12) {
           React.createElement(
             "div",
             { className: "column-container" },
-            React.createElement(Card, { text: cards[index].spanish }),
+            React.createElement(Card, {
+              text: cards[this.state.clicks].spanish,
+              index: this.state.clicks
+            }),
             React.createElement(
               "div",
               { className: "small-card" },
@@ -562,7 +590,7 @@ var StartReview = function (_React$Component12) {
               })
             )
           ),
-          React.createElement(Footer, { username: "Daniel" })
+          React.createElement(Footer, { username: username })
         );
       }
     }
@@ -682,26 +710,3 @@ ReactDOM.render(React.createElement(
   React.createElement(Route, { path: "/add/#", component: AddPage }),
   React.createElement(Route, { path: "*", component: StartReview })
 ), document.getElementById("root"));
-
-// ReactDOM.render(<App />, document.getElementById('root'));
-
-// StartReview PAGE
-
-// ReactDOM.render(
-//   <StartReview question="Hola Como Esta?" input="Hello! How are you?" />,
-//   document.getElementById("root")
-// );
-
-// FIRST TIME PAGE
-// ReactDOM.render(
-//   <AddPage  />,
-//   document.getElementById("root")
-// );
-
-// LOGIN PAGE
-// ReactDOM.render(<LogIn />, document.getElementById("root"));
-
-///////////////////////////////////////////////////////////
-
-// Render Card component
-// ReactDOM.render(<Card />, document.getElementById("root"));
