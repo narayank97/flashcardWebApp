@@ -53,7 +53,7 @@ function incSeenServer(req, res, next) {
     console.log("Incremented SEEN");
     let url = req.url;
     let myID = req.id;
-
+    console.log("THIS IS MY IDD DAWG                   :"+myID);
     if (myID != undefined) // got db stuff
     {
         const sqlite3 = require("sqlite3").verbose();  // use sqlite
