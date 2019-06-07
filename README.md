@@ -14,7 +14,11 @@
 
 #### Setup Database
 
+In case want to create new database
+
 `node createDB.js`
+
+`node createUserDB.js`
 
 #### Instructions
 
