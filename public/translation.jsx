@@ -448,7 +448,7 @@ ReactDOM.render(
     <Route path="/login/#" component={LogIn} />
     <Route path="/start_review/#" component={StartReview} />
     <Route path="/add/#" component={AddPage} />
-    <Route path="*" component={StartReview} />
+    <Route path="*" component={LogIn} />
   </Router>,
   document.getElementById("root")
 );
