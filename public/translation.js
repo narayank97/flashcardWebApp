@@ -643,9 +643,7 @@ var AddPage = function (_React$Component13) {
     value: function render() {
       var _state2 = this.state,
           error = _state2.error,
-          isLoaded = _state2.isLoaded,
           nameLoaded = _state2.nameLoaded,
-          items = _state2.items,
           username = _state2.username;
 
       if (error) {

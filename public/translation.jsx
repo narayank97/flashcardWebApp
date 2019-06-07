@@ -415,7 +415,7 @@ class AddPage extends React.Component {
     ]);
   }
   render() {
-    const { error, isLoaded, nameLoaded, items, username } = this.state;
+    const { error, nameLoaded, username } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!nameLoaded) {
