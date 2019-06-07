@@ -3,7 +3,8 @@ import {
   makeCorsRequestStore,
   renderStartReview,
   renderUserName,
-  seenIncrementClient
+  seenIncrementClient,
+  correctIncrementClient
 } from "./makeRequest.js";
 
 var Router = ReactRouter.Router;
@@ -280,31 +281,6 @@ class StartReview extends React.Component {
         )
     ]);
 
-    /*
-    cards = [
-      {
-        googleID: "2",
-        english: "hello",
-        spanish: "Hola",
-        seen: 0,
-        correct: 0
-      },
-      {
-        googleID: "2",
-        english: "bye",
-        spanish: "Adios",
-        seen: 0,
-        correct: 0
-      },
-      {
-        googleID: "2",
-        english: "yes",
-        spanish: "Si",
-        seen: 0,
-        correct: 0
-      }
-    ];
-    */
   }
 
   IncrementItem = () => {
@@ -315,6 +291,9 @@ class StartReview extends React.Component {
       isCorrect,
       cards[this.state.clicks].seen
     );
+    correctIncrementClient(this.state.clicks,
+      isCorrect,
+      cards[this.state.clicks].seen)
 
     this.setState({ clicks: this.state.clicks + 1 });
     if (this.state.clicks >= cards.length - 1) {
