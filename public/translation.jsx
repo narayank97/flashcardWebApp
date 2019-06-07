@@ -184,6 +184,9 @@ class Card extends React.Component {
     }
     console.log(this.correct);
     isCorrect = this.correct;
+    correctIncrementClient(this.state.clicks,
+      isCorrect,
+      cards[this.props.index].seen)
     this.setState({ flipped: !this.state.flipped });
   };
   render() {
@@ -291,9 +294,7 @@ class StartReview extends React.Component {
       isCorrect,
       cards[this.state.clicks].seen
     );
-    correctIncrementClient(this.state.clicks,
-      isCorrect,
-      cards[this.state.clicks].seen)
+    
 
     this.setState({ clicks: this.state.clicks + 1 });
     if (this.state.clicks >= cards.length - 1) {
