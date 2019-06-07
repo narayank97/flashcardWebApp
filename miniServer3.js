@@ -52,10 +52,10 @@ function getUserName(req, res, next) {
 function incSeenServer(req, res, next) {
     console.log("Incremented SEEN");
     let url = req.url;
-    let myID = req.id;
+    let myIDobj = req.query;
     console.log("url is :"+ url);
-    console.log("THIS IS MY IDD DAWG                   :"+myID);
-    if (myID != undefined) // got db stuff
+    console.log("THIS IS MY IDD DAWG                   :"+myIDobj.id);
+    if (myIDobj.id != undefined) // got db stuff
     {
         const sqlite3 = require("sqlite3").verbose();  // use sqlite
         const fs = require("fs"); // file system
