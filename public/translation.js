@@ -361,7 +361,7 @@ var Card = function (_React$Component11) {
       console.log(_this11.correct);
       isCorrect = _this11.correct;
       console.log("ABOUT TO CALL CORRECT CLIENT");
-      correctIncrementClient(_this11.state.clicks, isCorrect, cards[_this11.props.index].seen);
+      correctIncrementClient(_this11.props.index, isCorrect, cards[_this11.props.index].seen);
       _this11.setState({ flipped: !_this11.state.flipped });
     };
 
