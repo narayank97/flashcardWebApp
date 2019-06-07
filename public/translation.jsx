@@ -15,6 +15,7 @@ var browserHistory = ReactRouter.browserHistory;
 
 let cards = [];
 let isCorrect = false;
+let check = false;
 // let index = 0;
 let userInput = "";
 
@@ -181,9 +182,10 @@ class Card extends React.Component {
   flip = () => {
     if (userInput === cards[this.props.index].english) {
       this.correct = true;
-      if (this.cardFlipCheck === false){
+      if (check === false){
         cards[this.props.index].correct++;
         this.cardFlipCheck = true;
+        check = true;
       }
     }
     else {
@@ -231,26 +233,7 @@ class StartReview extends React.Component {
   }
 
   componentDidMount() {
-    /*
-    fetch("/startreview")
-      .then(res => res.json())
-      .then(
-        result => {
-          this.setState({
-            isLoaded: true,
-            items: result,
-            clicks: 0
-          });
-        },
-        error => {
-          this.setState({
-            isLoaded: true,
-            error,
-            clicks: 0
-          });
-        }
-      );
-      */
+
 
     Promise.all([
       fetch("/startreview")

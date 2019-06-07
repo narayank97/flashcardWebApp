@@ -16,6 +16,7 @@ var browserHistory = ReactRouter.browserHistory;
 
 var cards = [];
 var isCorrect = false;
+var check = false;
 // let index = 0;
 var userInput = "";
 
@@ -356,9 +357,10 @@ var Card = function (_React$Component11) {
     _this11.flip = function () {
       if (userInput === cards[_this11.props.index].english) {
         _this11.correct = true;
-        if (_this11.cardFlipCheck === false) {
+        if (check === false) {
           cards[_this11.props.index].correct++;
           _this11.cardFlipCheck = true;
+          check = true;
         }
       } else {
         _this11.correct = false;
@@ -442,27 +444,6 @@ var StartReview = function (_React$Component12) {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this13 = this;
-
-      /*
-      fetch("/startreview")
-        .then(res => res.json())
-        .then(
-          result => {
-            this.setState({
-              isLoaded: true,
-              items: result,
-              clicks: 0
-            });
-          },
-          error => {
-            this.setState({
-              isLoaded: true,
-              error,
-              clicks: 0
-            });
-          }
-        );
-        */
 
       Promise.all([fetch("/startreview").then(function (res) {
         return res.json();
