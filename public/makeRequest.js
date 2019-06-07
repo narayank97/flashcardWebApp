@@ -40,6 +40,7 @@ export function renderStartReview() {
 
 export function seenIncrementClient(id, isCorrect, seen) {
   //let input = document.getElementById("myWord").value;
+  id = id + 1;
   console.log("In Increment Client", id, isCorrect);
   let url = "seen?id="+id;
   let xhr = createCORSRequest("GET", url);
