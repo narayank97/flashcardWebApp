@@ -66,6 +66,7 @@ export function seenIncrementClient(id, isCorrect, seen) {
 
 export function correctIncrementClient(id, isCorrect, seen) {
   //let input = document.getElementById("myWord").value;
+  console.log("IM IN CORRECT YAY");
   id = id + 1;
   console.log("Correct Client", id, isCorrect);
   let url = "correct?id="+id;
