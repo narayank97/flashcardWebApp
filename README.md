@@ -29,3 +29,5 @@ In case want to create new database
 
 `node createUserDB.js`
 
+#### If that doesnt work
+You can just run `node miniServer3.js` in my folder : kknaraya -> flashcardWebApp , `run node miniServer3.js`  
